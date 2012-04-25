@@ -16,3 +16,8 @@ DerivedData
 *.perspectivev3
 xcuserdata
 
+# Extra files
+*.o
+./include
+libdelta
+
