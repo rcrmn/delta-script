@@ -1,0 +1,8 @@
+
+print("This should print 987654: ", 987654, "\n")
+print("This should print 3.14159265: ", 3.14159265, "\n")
+
+print("This should print true: ", true, "\n")
+print("This should print false: ", false, "\n")
+
+print("Should this print null or nothing? ", null, "\n")

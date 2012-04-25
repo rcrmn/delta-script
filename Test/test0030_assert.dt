@@ -1,0 +1,26 @@
+
+
+assert("Should not print this!\n", true)
+
+assert_false("This should not be printed.\n", false)
+
+assert_false("This should not be printed either.\n", ! true)
+
+assert("This should not be printed.\n", ! false)
+
+
+print("Testing more bool operators:\n")
+
+assert_false(!true)
+assert(!!true)
+
+assert(!false)
+assert_false(!!true)
+
+assert(true || false)
+assert(false||true)
+
+assert(true && true)
+assert( !(false&&false) )
+
+assert( true&&(false||true) )

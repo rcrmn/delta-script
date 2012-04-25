@@ -1,0 +1,12 @@
+
+print("Should be 3: ", 1+2, "\n")
+print("Should be 10: ", 2*5, "\n")
+print("Should be 5: ", 7-2, "\n")
+print("Should be 5: ", 10/2, "\n")
+
+print("Should be 17: ", 7+1*10, "\n")
+print("Should be 9: ", 6/2*3, "\n")
+
+print("Should be 80: ", (7+1)*10, "\n")
+print("Should be 1: ", 6/(2*3), "\n")
+

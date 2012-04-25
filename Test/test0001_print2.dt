@@ -1,0 +1,5 @@
+
+print("This should be printed in one line ")
+print("and this should be in the same line.\n")
+
+print("This should be ", "printed ", "in ", "one ", "line ", "with correct ", "spaces.\n")

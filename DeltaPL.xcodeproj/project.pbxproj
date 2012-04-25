@@ -1,0 +1,229 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D817DA9D15483DB70017EC8A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D817DA9C15483DB70017EC8A /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D817DA9615483DB70017EC8A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D817DA9815483DB70017EC8A /* DeltaPL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DeltaPL; sourceTree = BUILT_PRODUCTS_DIR; };
+		D817DA9C15483DB70017EC8A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D817DA9E15483DB70017EC8A /* DeltaPL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DeltaPL.1; sourceTree = "<group>"; };
+		D86737C315483E050082F95B /* test0001_print1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0001_print1.dt; sourceTree = "<group>"; };
+		D86737C415483E050082F95B /* test0001_print2.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0001_print2.dt; sourceTree = "<group>"; };
+		D86737C515483E050082F95B /* test0010_comments_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0010_comments_1.dt; sourceTree = "<group>"; };
+		D86737C615483E050082F95B /* test0010_comments_2.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0010_comments_2.dt; sourceTree = "<group>"; };
+		D86737C715483E050082F95B /* test0020_print_basic_types_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0020_print_basic_types_1.dt; sourceTree = "<group>"; };
+		D86737C815483E050082F95B /* test0030_assert.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0030_assert.dt; sourceTree = "<group>"; };
+		D86737C915483E050082F95B /* test0030_booleans_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0030_booleans_1.dt; sourceTree = "<group>"; };
+		D86737CA15483E050082F95B /* test0031_numbers_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0031_numbers_1.dt; sourceTree = "<group>"; };
+		D86737CB15483E050082F95B /* test0032_strings_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0032_strings_1.dt; sourceTree = "<group>"; };
+		D86737CC15483E050082F95B /* test0050_lists_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0050_lists_1.dt; sourceTree = "<group>"; };
+		D86737CD15483E050082F95B /* test0051_maps_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0051_maps_1.dt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D817DA9515483DB70017EC8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D817DA8D15483DB70017EC8A = {
+			isa = PBXGroup;
+			children = (
+				D86737C215483E050082F95B /* Test */,
+				D817DA9B15483DB70017EC8A /* DeltaPL */,
+				D817DA9915483DB70017EC8A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D817DA9915483DB70017EC8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D817DA9815483DB70017EC8A /* DeltaPL */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D817DA9B15483DB70017EC8A /* DeltaPL */ = {
+			isa = PBXGroup;
+			children = (
+				D817DA9C15483DB70017EC8A /* main.cpp */,
+				D817DA9E15483DB70017EC8A /* DeltaPL.1 */,
+			);
+			path = DeltaPL;
+			sourceTree = "<group>";
+		};
+		D86737C215483E050082F95B /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				D86737C315483E050082F95B /* test0001_print1.dt */,
+				D86737C415483E050082F95B /* test0001_print2.dt */,
+				D86737C515483E050082F95B /* test0010_comments_1.dt */,
+				D86737C615483E050082F95B /* test0010_comments_2.dt */,
+				D86737C715483E050082F95B /* test0020_print_basic_types_1.dt */,
+				D86737C815483E050082F95B /* test0030_assert.dt */,
+				D86737C915483E050082F95B /* test0030_booleans_1.dt */,
+				D86737CA15483E050082F95B /* test0031_numbers_1.dt */,
+				D86737CB15483E050082F95B /* test0032_strings_1.dt */,
+				D86737CC15483E050082F95B /* test0050_lists_1.dt */,
+				D86737CD15483E050082F95B /* test0051_maps_1.dt */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D817DA9715483DB70017EC8A /* DeltaPL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D817DAA115483DB70017EC8A /* Build configuration list for PBXNativeTarget "DeltaPL" */;
+			buildPhases = (
+				D817DA9415483DB70017EC8A /* Sources */,
+				D817DA9515483DB70017EC8A /* Frameworks */,
+				D817DA9615483DB70017EC8A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeltaPL;
+			productName = DeltaPL;
+			productReference = D817DA9815483DB70017EC8A /* DeltaPL */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D817DA8F15483DB70017EC8A /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = D817DA9215483DB70017EC8A /* Build configuration list for PBXProject "DeltaPL" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D817DA8D15483DB70017EC8A;
+			productRefGroup = D817DA9915483DB70017EC8A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D817DA9715483DB70017EC8A /* DeltaPL */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D817DA9415483DB70017EC8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D817DA9D15483DB70017EC8A /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D817DA9F15483DB70017EC8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D817DAA015483DB70017EC8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D817DAA215483DB70017EC8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D817DAA315483DB70017EC8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D817DA9215483DB70017EC8A /* Build configuration list for PBXProject "DeltaPL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D817DA9F15483DB70017EC8A /* Debug */,
+				D817DAA015483DB70017EC8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D817DAA115483DB70017EC8A /* Build configuration list for PBXNativeTarget "DeltaPL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D817DAA215483DB70017EC8A /* Debug */,
+				D817DAA315483DB70017EC8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D817DA8F15483DB70017EC8A /* Project object */;
+}

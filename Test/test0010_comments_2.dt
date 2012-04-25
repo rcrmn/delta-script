@@ -1,0 +1,20 @@
+
+//{
+print("This should not be executed.\n")
+//}
+
+/*/
+
+print("This shouldn't be executed either.\n")
+
+/*/
+
+///{
+print("This SHOULD be executed.\n")
+//}
+
+//{
+print("This should also be executed.\n")
+///}
+
+print("Shouldn't be a mistake that there's no extra line at the end.\n")
