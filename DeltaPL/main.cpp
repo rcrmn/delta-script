@@ -4,12 +4,20 @@
 //
 
 #include <iostream>
+#include <cstdio>
+#include "lexer/lexer.h"
+
+#define INPUT_FILE "test.dt"
 
 int main (int argc, const char * argv[])
 {
 
-	// insert code here...
 	std::cout << "Hello, World!\n";
+	
+	FILE * f = fopen(INPUT_FILE, "r");
+	
+	lexer(f);
+	
     return 0;
 }
 

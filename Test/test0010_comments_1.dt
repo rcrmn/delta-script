@@ -1,7 +1,33 @@
+// This is a comment
+
+.. code .. //{ Block comment //} .. code ..
+
+//{
+Multi-line
+comment
+//}
+
+///{ One line comment
+This is code!!
+//}
+
+//{
+This is a comment!!
+///}
+It will be a comment until it finds the corresponding:
+//}
+
+Block comments can be nested:
+//{
+comment
+	//{
+	nested comment
+	//}
+still a commment
+//}
+
 // print("hola")
-/*
-print("In this file")
-*/
+
 
 //{
 print("NOTHING should be executed")

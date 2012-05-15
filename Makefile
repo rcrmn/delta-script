@@ -15,6 +15,9 @@
 #### VARIABLES DEFINITIONS ####
 
 CXX = g++
+CC = gcc
+LIBS += -lfl
+
 
 #####
 ## Directory Names
@@ -22,30 +25,54 @@ CXX = g++
 SRCDIR ?= ./DeltaPL
 
 BUILDDIRNAME ?= Build
+SPECIFICBUILDNAME ?= specific
+SPECIFICBUILDNAME := $(BUILDDIRNAME)/$(SPECIFICBUILDNAME)
 BUILDDIR ?= ./$(BUILDDIRNAME)
 
 LIBHDIR ?= include
 
+
+
 #####
 ## Lists of Files
 
+
+#### SPECIFIC SOURCE AND CODE FILES ####
+
+SPECIFIC_CFILES = 
+SPECIFIC_HFILES = lexer/lexer.h
+SPECIFIC_OFILES = lexer.o
+
+#### END SPECIFIC TARGETS ####
+
+
+
 ### Code files
-CFILES = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*.c)
+SPECIFIC_CFILES  := $(addprefix $(SRCDIR)/, $(SPECIFIC_CFILES))
+CFILES += $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*.c)
 
 ### Header files
-HFILES = $(wildcard $(SRCDIR)/*.h)
+SPECIFIC_HFILES  := $(addprefix $(SRCDIR)/, $(SPECIFIC_HFILES))
+HFILES += $(wildcard $(SRCDIR)/*.h)
 HFILENAMES = $(addprefix $(LIBHDIR)/,$(notdir $(HFILES)))
 
+
 ### Object files
-OFILES = $(addsuffix .o, $(addprefix $(BUILDDIR)/, $(basename $(notdir $(CFILES)))))
+SPECIFIC_OFILES  := $(addprefix ./$(SPECIFICBUILDNAME)/, $(basename $(notdir $(SPECIFIC_OFILES))))
+OFILES += $(addsuffix .o, $(addprefix $(BUILDDIR)/, $(basename $(notdir $(CFILES)))))
+
 
 ### Object files for Dynamic Libraries
-LIBSOFILES = $(filter-out $(BUILDDIR)/main.o, $(OFILES))
-DYLIBSOFILES = $(addsufix .pico, $(filter-out $(BUILDDIR)/main.o, $(OFILES)))
+LIBSOFILES = $(filter-out $(BUILDDIR)/main.o, $(OFILES) $(SPECIFIC_OFILES))
+DYLIBSOFILES = $(addsufix .pico, $(filter-out $(BUILDDIR)/main.o, $(OFILES) $(SPECIFIC_OFILES))))
 
 #### END VARIABLES DEFINITIONS ####
 
-#### MAIN TARGETS ####
+
+
+#################################
+######### Main targets ##########
+#################################
 
 #####
 ## Interpreter
@@ -86,14 +113,25 @@ cleandist:
 ######
 ## Main program
 
-delta: $(OFILES)
-	$(CXX) $(OFILES) -o delta
+delta: $(OFILES) $(SPECIFIC_OFILES)
+	$(CXX) $(OFILES) $(SPECIFIC_OFILES) $(LIBS) -o delta
 
 ######
 ## Object files
 
-$(BUILDDIR)/%.o: $(CFILES) $(HFILES) | $(BUILDDIRNAME)
+## Specific ##
+$(SPECIFICBUILDNAME)/lexer.o: $(SRCDIR)/lexer/lexer.h $(SRCDIR)/lexer/delta.flex
+	flex -o $(SRCDIR)/lexer/lex.yy.c $(SRCDIR)/lexer/delta.flex
+	$(CC) -c $(SRCDIR)/lexer/lex.yy.c -o $(SPECIFICBUILDNAME)/lexer.o -lfl
+
+
+
+## General ##
+## $(BUILDDIR)/%.o: $(CFILES) $(HFILES) | $(BUILDDIRNAME) $(SPECIFICBUILDNAME)
+$(OFILES): $(CFILES) $(HFILES) | $(BUILDDIRNAME) $(SPECIFICBUILDNAME)
 	$(CXX) -c $(SRCDIR)/$(*F).cpp -o $(BUILDDIR)/$(@F)
+
+
 
 #####
 ## Creation of needed directories
@@ -101,8 +139,12 @@ $(BUILDDIR)/%.o: $(CFILES) $(HFILES) | $(BUILDDIRNAME)
 $(BUILDDIRNAME):
 	mkdir -p $(BUILDDIRNAME)
 
+$(SPECIFICBUILDNAME):
+	mkdir -p $(SPECIFICBUILDNAME)
+
 $(LIBHDIR):
 	mkdir -p $(LIBHDIR)
+
 
 #####
 ## Copying the header files to the include dir

@@ -18,6 +18,7 @@ xcuserdata
 
 # Extra files
 *.o
+*.out
 ./include
 libdelta
 

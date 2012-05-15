@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D83BBFA61562D8CB006468B6 /* lex.yy.c in Sources */ = {isa = PBXBuildFile; fileRef = D83BBFA51562D8CB006468B6 /* lex.yy.c */; };
+		D83BBFA81562D989006468B6 /* libfl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D83BBFA71562D989006468B6 /* libfl.a */; };
 		D86737D2154844950082F95B /* deltaEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D86737D0154844950082F95B /* deltaEngine.cpp */; };
 		D86737D815485EDD0082F95B /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D86737D615485EDD0082F95B /* object.cpp */; };
 		D86737DB154865E20082F95B /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D86737D9154865E20082F95B /* function.cpp */; };
 		D86737DE1548664E0082F95B /* objectInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D86737DC1548664E0082F95B /* objectInstance.cpp */; };
 		D86737E1154866770082F95B /* class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D86737DF154866760082F95B /* class.cpp */; };
 		D86737E5154882940082F95B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D86737E4154882940082F95B /* main.cpp */; };
-		D86737E71548829F0082F95B /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = D86737E61548829F0082F95B /* Makefile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,10 @@
 /* Begin PBXFileReference section */
 		D817DA9815483DB70017EC8A /* DeltaPL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DeltaPL; sourceTree = BUILT_PRODUCTS_DIR; };
 		D817DA9E15483DB70017EC8A /* DeltaPL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DeltaPL.1; sourceTree = "<group>"; };
+		D83BBFA21562D013006468B6 /* delta.flex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = delta.flex; sourceTree = "<group>"; };
+		D83BBFA31562D013006468B6 /* lexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lexer.h; sourceTree = "<group>"; };
+		D83BBFA51562D8CB006468B6 /* lex.yy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lex.yy.c; sourceTree = "<group>"; };
+		D83BBFA71562D989006468B6 /* libfl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfl.a; path = ../../../opt/local/lib/libfl.a; sourceTree = "<group>"; };
 		D86737C315483E050082F95B /* test0001_print1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0001_print1.dt; sourceTree = "<group>"; };
 		D86737C415483E050082F95B /* test0001_print2.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0001_print2.dt; sourceTree = "<group>"; };
 		D86737C515483E050082F95B /* test0010_comments_1.dt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test0010_comments_1.dt; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83BBFA81562D989006468B6 /* libfl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +77,7 @@
 		D817DA8D15483DB70017EC8A = {
 			isa = PBXGroup;
 			children = (
+				D83BBFA71562D989006468B6 /* libfl.a */,
 				D86737E61548829F0082F95B /* Makefile */,
 				D86737C215483E050082F95B /* Test */,
 				D817DA9B15483DB70017EC8A /* DeltaPL */,
@@ -89,6 +96,7 @@
 		D817DA9B15483DB70017EC8A /* DeltaPL */ = {
 			isa = PBXGroup;
 			children = (
+				D83BBFA11562D013006468B6 /* lexer */,
 				D86737E4154882940082F95B /* main.cpp */,
 				D817DA9E15483DB70017EC8A /* DeltaPL.1 */,
 				D86737D0154844950082F95B /* deltaEngine.cpp */,
@@ -103,6 +111,16 @@
 				D86737E0154866760082F95B /* class.h */,
 			);
 			path = DeltaPL;
+			sourceTree = "<group>";
+		};
+		D83BBFA11562D013006468B6 /* lexer */ = {
+			isa = PBXGroup;
+			children = (
+				D83BBFA51562D8CB006468B6 /* lex.yy.c */,
+				D83BBFA21562D013006468B6 /* delta.flex */,
+				D83BBFA31562D013006468B6 /* lexer.h */,
+			);
+			path = lexer;
 			sourceTree = "<group>";
 		};
 		D86737C215483E050082F95B /* Test */ = {
@@ -131,6 +149,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D817DAA115483DB70017EC8A /* Build configuration list for PBXNativeTarget "DeltaPL" */;
 			buildPhases = (
+				D83BBFA41562D034006468B6 /* ShellScript */,
 				D817DA9415483DB70017EC8A /* Sources */,
 				D817DA9515483DB70017EC8A /* Frameworks */,
 				D817DA9615483DB70017EC8A /* CopyFiles */,
@@ -166,6 +185,22 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D83BBFA41562D034006468B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "flex -o DeltaPL/lexer/lex.yy.c DeltaPL/lexer/delta.flex";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D817DA9415483DB70017EC8A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -177,7 +212,7 @@
 				D86737DE1548664E0082F95B /* objectInstance.cpp in Sources */,
 				D86737E1154866770082F95B /* class.cpp in Sources */,
 				D86737E5154882940082F95B /* main.cpp in Sources */,
-				D86737E71548829F0082F95B /* Makefile in Sources */,
+				D83BBFA61562D8CB006468B6 /* lex.yy.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +258,11 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				PRELINK_LIBS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -234,6 +274,11 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				PRELINK_LIBS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
