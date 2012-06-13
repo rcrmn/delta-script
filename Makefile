@@ -121,7 +121,7 @@ delta: $(OFILES) $(SPECIFIC_OFILES)
 
 ## Specific ##
 $(SPECIFICBUILDNAME)/lexer.o: $(SRCDIR)/lexer/lexer.h $(SRCDIR)/lexer/delta.flex
-	flex -o $(SRCDIR)/lexer/lex.yy.c $(SRCDIR)/lexer/delta.flex
+	flex $(SRCDIR)/lexer/delta.flex > $(SRCDIR)/lexer/lex.yy.c
 	$(CC) -c $(SRCDIR)/lexer/lex.yy.c -o $(SPECIFICBUILDNAME)/lexer.o -lfl
 
 

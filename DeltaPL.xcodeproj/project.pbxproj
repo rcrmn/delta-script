@@ -192,12 +192,13 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/DeltaPL/lexer/delta.flex",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "flex -o DeltaPL/lexer/lex.yy.c DeltaPL/lexer/delta.flex";
+			shellScript = "flex --stdout DeltaPL/lexer/delta.flex > DeltaPL/lexer/lex.yy.c";
 		};
 /* End PBXShellScriptBuildPhase section */
 
