@@ -14,7 +14,7 @@ The directory tree will be modified in the future to have a more "normal" struct
 
 ## Contributors
 
- * rcrmn (Roc)
+ * [rcrmn](https://github.com/rcrmn) (Roc)
 
 
 
