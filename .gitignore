@@ -22,3 +22,5 @@ xcuserdata
 ./include
 libdelta
 
+# Wiki files
+/doc/wiki
