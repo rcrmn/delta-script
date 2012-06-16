@@ -31,9 +31,6 @@ CMakeCache.txt
 cmake_install.cmake
 
 
-# Flex product file
-src/lexer/lex.yy.c
-
 
 # Product executable
 /delta
