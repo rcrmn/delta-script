@@ -19,8 +19,24 @@ xcuserdata
 # Extra files
 *.o
 *.out
-./include
 libdelta
 
 # Wiki files
 /doc/wiki
+
+# CMake files
+CMakeFiles
+Makefile
+CMakeCache.txt
+cmake_install.cmake
+
+
+# Flex product file
+src/lexer/lex.yy.c
+
+
+# Product executable
+/delta
+test.dt
+
+
