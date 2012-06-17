@@ -53,6 +53,6 @@ add_dependencies(delta lexerc)
 
 
 # Tell the compiler to use the flag -lfl (flex library) to compile the lexer source file
-set_target_properties(delta
-					PROPERTIES LINK_FLAGS "-lfl")
+#set_target_properties(delta
+#					PROPERTIES LINK_FLAGS "-lfl")
 

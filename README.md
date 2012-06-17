@@ -9,6 +9,7 @@ To compile, you need [CMake](http://www.cmake.org/) and [Flex](http://flex.sourc
 
 Only tested under mac. Should work under linux. No promises under windows. For [windows Flex try here](http://gnuwin32.sourceforge.net/packages/flex.htm).
 
+Theoretically the Flex library is not needed in the system to build if the lexer c file is already provided.
 
 To only create the lexer engine c file, run:
 ```

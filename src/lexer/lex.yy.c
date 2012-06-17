@@ -332,6 +332,9 @@ void yyfree (void *  );
 
 /* Begin user sect3 */
 
+#define yywrap(n) 1
+#define YY_SKIP_YYWRAP
+
 typedef char YY_CHAR;
 
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
@@ -2464,7 +2467,7 @@ int block_comment_depth=0;
 
 
 
-#line 2468 "lex.yy.c"
+#line 2471 "lex.yy.c"
 
 #define INITIAL 0
 #define COMMENT 1
@@ -2664,7 +2667,7 @@ YY_DECL
 
 
 
-#line 2668 "lex.yy.c"
+#line 2671 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -3101,7 +3104,7 @@ YY_RULE_SETUP
 #line 171 "delta.flex"
 ECHO;
 	YY_BREAK
-#line 3105 "lex.yy.c"
+#line 3108 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT):
 case YY_STATE_EOF(BLOCK_COMMENT):

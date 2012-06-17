@@ -7,7 +7,7 @@ compile with:
 */
 
 %option stack
-
+%option noyywrap
 
 %{
 
