@@ -49,4 +49,10 @@ In the future the ability to create static and dynamic libraries (and dlls) will
 
  * [rcrmn](https://github.com/rcrmn) (Roc)
 
+## Interesting links
+
+ * [FLEX Manual](http://flex.sourceforge.net/manual/)
+ * [BISON Manual](http://www.gnu.org/software/bison/manual/html_node/index.html)
+ * [BYACC Manual]() <-- Search for this.
+ * [Create Your own Prog. Lang.](http://createyourproglang.com/)
 
