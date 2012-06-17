@@ -33,7 +33,8 @@ In the future the ability to create static and dynamic libraries (and dlls) will
 
 ## TODO
 
- * Create the parser/semantic analyzer. Using Bison or hardcoding?
+ * Create the parser/semantic analyzer 
+([Bison](http://www.gnu.org/software/bison/) / [Berkeley Yacc](http://invisible-island.net/byacc/byacc.html) ?).
 
  * Create the optimizer. This will be, at first, skipped over.
 
@@ -41,8 +42,7 @@ In the future the ability to create static and dynamic libraries (and dlls) will
 
  * Create the code generator.
 
-
-In the future, the lexer will probably be implemented without the Flex library. Just for fun.
+ * Create the virtual machine.
 
 
 ## Contributors
