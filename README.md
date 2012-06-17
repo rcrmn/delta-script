@@ -11,7 +11,7 @@ Only tested under mac. Should work under linux. No promises under windows. For [
 
 Theoretically the Flex library is not needed in the system to build if the lexer c file is already provided.
 
-To only create the lexer engine c file, run:
+To create only the lexer engine c file, run:
 ```
 $ cd /path/to/the/root/dir
 $ cmake .
@@ -32,6 +32,10 @@ In the future the ability to create static and dynamic libraries (and dlls) will
 
 
 ## TODO
+
+ * Finish the language syntax definition.
+
+ * Finnish the lexer.
 
  * Create the parser/semantic analyzer 
 ([Bison](http://www.gnu.org/software/bison/) / [Berkeley Yacc](http://invisible-island.net/byacc/byacc.html) ?).
