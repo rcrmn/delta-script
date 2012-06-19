@@ -1,33 +1,33 @@
-// This is a comment
 
-.. code .. //{ Block comment //} .. code ..
+print("[1]"); //{ print("Block comment") //} print("[2]")
 
-//{
-Multi-line
-comment
-//}
+print("[3]") //{ print("Start of ")
+print("multiline ")
+print("  comment.")
+//} print("[4]")
 
-///{ One line comment
-This is code!!
-//}
+print("[5]"); ///{ print("[6]")
+print("[7]")
+print("[8]"); //} print("[9]")
 
-//{
-This is a comment!!
-///}
-It will be a comment until it finds the corresponding:
-//}
+print("[10]") //{ print("Start of comment 2.")
+print( "This is a comment!!" )
+///} print("Still a comment!")
+print( "It will be a comment until it finds the corresponding:" )
+print("Still a comment (2)!"); //} print("[11]")
 
-Block comments can be nested:
-//{
-comment
-	//{
-	nested comment
-	//}
-still a commment
-//}
+print( "[12] Block comments can be nested:" )
+print("[13]"); //{ print("Start of comment 3.")
+print("First level of comment.")
+print("Still first level."); //{ print("Second level of comment.")
+	print("Inside nested comment.")
+print("Still inside second level."); //} print("First level of comment again.")
+print("First level of comment. Last line.")
+print("End of comment 3."); //} print("[14] This is code again!")
 
-// print("hola")
-
+print("[15]")
+print("[16]") // print("One line comment.")
+print("[17]")
 
 //{
 print("NOTHING should be executed")

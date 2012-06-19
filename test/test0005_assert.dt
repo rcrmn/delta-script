@@ -1,12 +1,13 @@
 
+print("Testing Assert.")
 
-assert("Should not print this!\n", true)
+assert("Assert true is true.\n", true)
 
-assert_false("This should not be printed.\n", false)
+assert_false("Assert false is false.\n", false)
 
-assert_false("This should not be printed either.\n", ! true)
+assert_false("Assert not true is false.\n", ! true)
 
-assert("This should not be printed.\n", ! false)
+assert("Assert not false is true.\n", ! false)
 
 
 print("Testing more bool operators:\n")
@@ -24,3 +25,4 @@ assert(true && true)
 assert( !(false&&false) )
 
 assert( true&&(false||true) )
+

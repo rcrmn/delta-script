@@ -3,12 +3,6 @@
 print("This should not be executed.\n")
 //}
 
-/*/
-
-print("This shouldn't be executed either.\n")
-
-/*/
-
 ///{
 print("This SHOULD be executed.\n")
 //}
