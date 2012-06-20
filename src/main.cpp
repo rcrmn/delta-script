@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <cstdio>
-#include "lexer/lexer.h"
+#include "lexer.h"
 
 #define INPUT_FILE "test.dt"
 

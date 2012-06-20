@@ -11,9 +11,9 @@ project(deltalang)
 # ================================================================
 
 # Execute the lexer generator (flex) to get the latest changes applied
-add_custom_target(lexerc flex -Cf -o lex.yy.c delta.flex
+add_custom_target(lexerc flex -Cf -o lex.yy.c lexer/delta.flex
 					DEPENDS src/lexer/delta.flex
-					WORKING_DIRECTORY src/lexer/
+					WORKING_DIRECTORY src/
 					COMMENT "Generating the lexer engine (flex)." VERBATIM
 					SOURCES src/lexer/delta.flex)
 
@@ -26,16 +26,13 @@ add_custom_target(lexerc flex -Cf -o lex.yy.c delta.flex
 # ================================================================
 
 # Get all the files inside the src and src/lexer directories, relative to the root.
-file(GLOB MAIN_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp")
-
-file(GLOB LEXER_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/lexer/*.c" "src/lexer/*.cc" "src/lexer/*.cpp")
-
-message("In dir src/:         ${MAIN_SOURCE}")
-
-message("In dir src/lexer/:   ${LEXER_SOURCE}")
+file(GLOB C_SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp" "src/*.c")
 
 
-set(ALL_SOURCES ${MAIN_SOURCE} ${LEXER_SOURCE})
+message("In dir src/:         ${C_SOURCE_FILES}")
+
+
+set(ALL_SOURCES ${C_SOURCE_FILES})
 
 
 # ================================================================

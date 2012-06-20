@@ -2447,7 +2447,7 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "delta.flex"
+#line 1 "lexer/delta.flex"
 /* Delta Programming Language scanner
 
 compile with:
@@ -2455,7 +2455,7 @@ compile with:
 	g++ lex.yy.c -lfl
 
 */
-#line 13 "delta.flex"
+#line 13 "lexer/delta.flex"
 
 #include <stdio.h>
 int num_lines=0;
@@ -2662,7 +2662,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 34 "delta.flex"
+#line 34 "lexer/delta.flex"
 
 
 
@@ -2741,7 +2741,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 38 "delta.flex"
+#line 38 "lexer/delta.flex"
 { ++num_lines; }
 	YY_BREAK
 /*
@@ -2749,52 +2749,52 @@ YY_RULE_SETUP
 		 */
 case 2:
 YY_RULE_SETUP
-#line 45 "delta.flex"
+#line 45 "lexer/delta.flex"
 { return(COLON); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 46 "delta.flex"
+#line 46 "lexer/delta.flex"
 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 47 "delta.flex"
+#line 47 "lexer/delta.flex"
 
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 48 "delta.flex"
+#line 48 "lexer/delta.flex"
 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 49 "delta.flex"
+#line 49 "lexer/delta.flex"
 
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 50 "delta.flex"
+#line 50 "lexer/delta.flex"
 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 51 "delta.flex"
+#line 51 "lexer/delta.flex"
 
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 52 "delta.flex"
+#line 52 "lexer/delta.flex"
 
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 53 "delta.flex"
+#line 53 "lexer/delta.flex"
 
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 54 "delta.flex"
+#line 54 "lexer/delta.flex"
 
 	YY_BREAK
 /*
@@ -2802,127 +2802,127 @@ YY_RULE_SETUP
 			 */
 case 12:
 YY_RULE_SETUP
-#line 61 "delta.flex"
+#line 61 "lexer/delta.flex"
 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 62 "delta.flex"
+#line 62 "lexer/delta.flex"
 
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 63 "delta.flex"
+#line 63 "lexer/delta.flex"
 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 64 "delta.flex"
+#line 64 "lexer/delta.flex"
 
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 65 "delta.flex"
+#line 65 "lexer/delta.flex"
 
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 66 "delta.flex"
+#line 66 "lexer/delta.flex"
 
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 67 "delta.flex"
+#line 67 "lexer/delta.flex"
 
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 68 "delta.flex"
+#line 68 "lexer/delta.flex"
 
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 69 "delta.flex"
+#line 69 "lexer/delta.flex"
 
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 70 "delta.flex"
+#line 70 "lexer/delta.flex"
 
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 71 "delta.flex"
+#line 71 "lexer/delta.flex"
 
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 72 "delta.flex"
+#line 72 "lexer/delta.flex"
 
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 73 "delta.flex"
+#line 73 "lexer/delta.flex"
 
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 74 "delta.flex"
+#line 74 "lexer/delta.flex"
 
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 75 "delta.flex"
+#line 75 "lexer/delta.flex"
 
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 76 "delta.flex"
+#line 76 "lexer/delta.flex"
 
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 77 "delta.flex"
+#line 77 "lexer/delta.flex"
 
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 78 "delta.flex"
+#line 78 "lexer/delta.flex"
 
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 79 "delta.flex"
+#line 79 "lexer/delta.flex"
 
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 80 "delta.flex"
+#line 80 "lexer/delta.flex"
 
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 81 "delta.flex"
+#line 81 "lexer/delta.flex"
 
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 82 "delta.flex"
+#line 82 "lexer/delta.flex"
 
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 83 "delta.flex"
+#line 83 "lexer/delta.flex"
 
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 84 "delta.flex"
+#line 84 "lexer/delta.flex"
 
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 85 "delta.flex"
+#line 85 "lexer/delta.flex"
 
 	YY_BREAK
 /*
@@ -2933,7 +2933,7 @@ case 37:
 (yy_c_buf_p) = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 93 "delta.flex"
+#line 93 "lexer/delta.flex"
 { return(IF); }
 	YY_BREAK
 case 38:
@@ -2941,7 +2941,7 @@ case 38:
 (yy_c_buf_p) = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 94 "delta.flex"
+#line 94 "lexer/delta.flex"
 { return(ELIF); }
 	YY_BREAK
 case 39:
@@ -2949,7 +2949,7 @@ case 39:
 (yy_c_buf_p) = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 95 "delta.flex"
+#line 95 "lexer/delta.flex"
 { return(ELSE); }
 	YY_BREAK
 case 40:
@@ -2957,7 +2957,7 @@ case 40:
 (yy_c_buf_p) = yy_cp = yy_bp + 5;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 97 "delta.flex"
+#line 97 "lexer/delta.flex"
 { return(WHILE); }
 	YY_BREAK
 case 41:
@@ -2965,7 +2965,7 @@ case 41:
 (yy_c_buf_p) = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 99 "delta.flex"
+#line 99 "lexer/delta.flex"
 { return(FOR); }
 	YY_BREAK
 case 42:
@@ -2974,7 +2974,7 @@ case 42:
 (yy_c_buf_p) = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 100 "delta.flex"
+#line 100 "lexer/delta.flex"
 { return(IN); }
 	YY_BREAK
 case 43:
@@ -2983,7 +2983,7 @@ case 43:
 (yy_c_buf_p) = yy_cp = yy_bp + 5;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 102 "delta.flex"
+#line 102 "lexer/delta.flex"
 { return(BREAK); }
 	YY_BREAK
 case 44:
@@ -2992,7 +2992,7 @@ case 44:
 (yy_c_buf_p) = yy_cp = yy_bp + 8;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 103 "delta.flex"
+#line 103 "lexer/delta.flex"
 { return(CONTINUE); }
 	YY_BREAK
 case 45:
@@ -3001,7 +3001,7 @@ case 45:
 (yy_c_buf_p) = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 106 "delta.flex"
+#line 106 "lexer/delta.flex"
 { return(END); }
 	YY_BREAK
 case 46:
@@ -3010,7 +3010,7 @@ case 46:
 (yy_c_buf_p) = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 108 "delta.flex"
+#line 108 "lexer/delta.flex"
 { return(NEW); }
 	YY_BREAK
 /*
@@ -3024,19 +3024,19 @@ YY_RULE_SETUP
 		 */
 case 47:
 YY_RULE_SETUP
-#line 131 "delta.flex"
+#line 131 "lexer/delta.flex"
 { BEGIN(COMMENT); }
 	YY_BREAK
 
 case 48:
 YY_RULE_SETUP
-#line 133 "delta.flex"
+#line 133 "lexer/delta.flex"
 /* Discard line */
 	YY_BREAK
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 134 "delta.flex"
+#line 134 "lexer/delta.flex"
 { ++num_lines; BEGIN(INITIAL); }
 	YY_BREAK
 
@@ -3045,25 +3045,25 @@ YY_RULE_SETUP
 		 */
 case 50:
 YY_RULE_SETUP
-#line 144 "delta.flex"
+#line 144 "lexer/delta.flex"
 { yy_push_state(BLOCK_COMMENT); }
 	YY_BREAK
 
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 146 "delta.flex"
+#line 146 "lexer/delta.flex"
 { ++num_lines; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 147 "delta.flex"
+#line 147 "lexer/delta.flex"
 /* Discard character */
 	YY_BREAK
 case 53:
 /* rule 53 can match eol */
 YY_RULE_SETUP
-#line 149 "delta.flex"
+#line 149 "lexer/delta.flex"
 { 
 											++num_lines; 
 											yy_push_state(BLOCK_COMMENT);
@@ -3071,13 +3071,13 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 153 "delta.flex"
+#line 153 "lexer/delta.flex"
 { yy_push_state(BLOCK_COMMENT); }
 	YY_BREAK
 case 55:
 /* rule 55 can match eol */
 YY_RULE_SETUP
-#line 155 "delta.flex"
+#line 155 "lexer/delta.flex"
 {
 											++num_lines;
 											yy_pop_state();
@@ -3085,7 +3085,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 159 "delta.flex"
+#line 159 "lexer/delta.flex"
 {
 											yy_pop_state();
 										}
@@ -3093,7 +3093,7 @@ YY_RULE_SETUP
 
 case 57:
 YY_RULE_SETUP
-#line 166 "delta.flex"
+#line 166 "lexer/delta.flex"
 { 
 											// TODO: save error string
 											return(ERROR); 
@@ -3101,7 +3101,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 171 "delta.flex"
+#line 171 "lexer/delta.flex"
 ECHO;
 	YY_BREAK
 #line 3108 "lex.yy.c"
@@ -4145,7 +4145,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 171 "delta.flex"
+#line 171 "lexer/delta.flex"
 
 
 
