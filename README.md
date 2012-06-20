@@ -5,25 +5,32 @@ Visit [the Wiki](https://github.com/rcrmn/delta-script/wiki) for syntax and lang
 
 ## Compiling
 
-To compile, you need [CMake](http://www.cmake.org/) and [Flex](http://flex.sourceforge.net/)
+To compile, you need [CMake](http://www.cmake.org/), [Flex](http://flex.sourceforge.net/) and [Bison](http://www.gnu.org/software/bison/)
 
 Only tested under mac. Should work under linux. No promises under windows. For [windows Flex try here](http://gnuwin32.sourceforge.net/packages/flex.htm).
 
 Theoretically the Flex library is not needed in the system to build if the lexer c file is already provided.
 
 To create only the lexer engine c file, run:
-```
-$ cd /path/to/the/root/dir
-$ cmake .
-$ make lexerc
-```
+
+    $ cd /path/to/the/root/dir
+    $ cmake .
+    $ make lexerc
+
+
+To create only the parser engine c file, run:
+
+    $ cd /path/to/the/root/dir
+    $ cmake .
+    $ make parserc
+
 
 Now, to compile, run:
-```
-$ cd /path/to/the/root/dir
-$ cmake .
-$ make
-```
+
+    $ cd /path/to/the/root/dir
+    $ cmake .
+    $ make
+
 
 This should create an executable named `delta` in the same directory.
 
