@@ -42,8 +42,8 @@ using namespace std;
 #define YY_INPUT(buf,result,max_size)   \
 {                                       \
    char c;                              \
-   (*yyextra->m_is) >> c;                 \
-   if(yyextra->m_is->eof())               \
+   (*yyextra->m_is) >> c;               \
+   if(yyextra->m_is->eof())             \
       result = YY_NULL;                 \
    else {                               \
       buf[0] = c;                       \
@@ -158,6 +158,11 @@ KWB			[ \t\(]
 		/*
 		 *	Constant literals
 		 */
+
+		 /*
+		  * Numbers
+		  * TODO: CHANGE ME!!
+		  */
 [0-9]+									{ yylval->number = atoi(yytext); return(NUMBER); }
 
 

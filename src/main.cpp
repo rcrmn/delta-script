@@ -27,9 +27,6 @@ int main (int argc, const char * argv[])
 		cout << context.result + 1 << endl;
 	}
 	
-//	FILE * f = fopen(INPUT_FILE, "r");
-	
-//	lexer(f);
 	
     return 0;
 }

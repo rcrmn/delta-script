@@ -41,13 +41,6 @@ namespace delta {
 };
 
 
-/*union YYSTYPE 
-{
-	double val;
-	symrec *tptr;
-};
-typedef union YYSTYPE YYSTYPE;*/
-
 
 
 #endif
