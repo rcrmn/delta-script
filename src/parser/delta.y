@@ -82,7 +82,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 start:
 	 NUMBER
-			{ /* context->result = $1; */ }
+			{ context->result = $1; }
 
 
 %%

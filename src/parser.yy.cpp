@@ -1463,7 +1463,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 85 "parser/delta.y"
-    { /* context->result = $1; */ }
+    { context->result = (yyvsp[(1) - (1)].number); }
     break;
 
 

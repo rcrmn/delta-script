@@ -18,8 +18,10 @@ namespace delta {
 				void*				m_scanner;
 				std::istream*		m_is;
 
+				int result;
+
 			public:
-				Parser_Context			(std::istream* is)
+				Parser_Context			(std::istream* is = &std::cin)
 				{
 					init_scanner();
 					this->m_is = is;
