@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <cstdio>
-#include "lexer.h"
+#include "parser.h"
 
 #define INPUT_FILE "test.dt"
 
@@ -16,7 +16,7 @@ int main (int argc, const char * argv[])
 	
 	FILE * f = fopen(INPUT_FILE, "r");
 	
-	lexer(f);
+//	lexer(f);
 	
     return 0;
 }
