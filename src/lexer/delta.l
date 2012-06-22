@@ -20,16 +20,18 @@ compile with:
 
 %{
 
-/*#include <stdio.h>
-//int num_lines=0;
-//int block_comment_depth=0;*/
+#include "deltaConfig.h"
 
-#include "parser.h"
+#include "parserContext.h"
 #include "parser.yy.hpp"
 
 #include <iostream>
 #include <sstream>
+#include <cstring>
+#include <cstdlib>
 
+
+using namespace delta;
 using namespace delta::parser;
 using namespace std;
 
@@ -57,6 +59,7 @@ using namespace std;
 %x COMMENT
 %x BLOCK_COMMENT
 %x STRING_CNST
+%x SYMBOL_STRING_CNST
 
 
 	/* Word Boundary */
@@ -74,12 +77,12 @@ KWB			[ \t\(]
 
 
 
-{ENDL}									{  }
+{ENDL}									{ return '\n'; }
 
-
+{WS}									{ return ' '; }
 
 		/*
-		 *	Symbols
+		 *	Special characters
 		 */
 ":"
 "."
@@ -97,6 +100,9 @@ KWB			[ \t\(]
 			/*
 			 *	Operators
 			 */
+"|"
+"&"
+"^"
 "*"
 "+"
 "-"
@@ -106,6 +112,7 @@ KWB			[ \t\(]
 "="
 "<"
 ">"
+
 "<="
 ">="
 "=="
@@ -119,9 +126,6 @@ KWB			[ \t\(]
 "&&"
 "||"
 "^^"
-"|"
-"&"
-"^"
 
 
 
@@ -129,41 +133,160 @@ KWB			[ \t\(]
 		 *	Keywords
 		 */
 
-"if"/{KWB}								{ return(IF); }
-"elif"/{KWB}							{ return(ELIF); }
-("else")/(:|{WS})						{ return(ELSE); }
+"if"									{ return(IF); }
+"elif"									{ return(ELIF); }
+"else"									{ return(ELSE); }
 
-"while"/{KWB}							{ return(WHILE); }
+"while"									{ return(WHILE); }
 
-"for"/{KWB}								{ return(FOR); }
-"in"/({WS}|{ENDL})						{ return(IN); }
+"for"									{ return(FOR); }
+"in"									{ return(IN); }
 
-"break"/({WS}|{ENDL}|;)					{ return(BREAK); }
-"continue"/({WS}|{ENDL}|;)				{ return(CONTINUE); }
-
-
-("end")/(;|{WS}|{ENDL})					{ return(END); }
+"break"									{ return(BREAK); }
+"continue"								{ return(CONTINUE); }
 
 
+"end"									{ return(END); }
 
-
-
-		/*
-		 *	Symbolic names
-		 */
 
 
 
 
 		/*
-		 *	Constant literals
+		 *	Symbol names
 		 */
+
+
+
+
+	/*
+	 *	Constant literals
+	 */
 
 		 /*
 		  * Numbers
-		  * TODO: CHANGE ME!!
 		  */
-[0-9]+									{ yylval->number = atoi(yytext); return(NUMBER); }
+
+
+"0"										|
+[1-9][0-9]*"f"?							|
+[0-9]*"."[0-9]+"f"?						|
+[0-9]+"."("f"?)							{ 
+											yylval->number = (number_t) atof(yytext); 
+											return(NUMBER); 
+										}
+
+
+			/* Hexadecimal notation */
+"0x"([a-fA-F0-9]+)						{
+											unsigned long int ii;
+											ii = strtoul(yytext, NULL, 16);
+											yylval->number = (number_t) ii;
+											return NUMBER;
+										}
+
+		  	/* Binary notation */
+"0b"(0|1)+								{
+											unsigned long int ii;
+											ii = strtoul(yytext+2, NULL, 2);
+											yylval->number = (number_t) ii;
+											return NUMBER;
+										}
+
+
+			/* Octal notation */
+"0o"[0-7]+								{
+											unsigned long int ii;
+											ii = strtoul(yytext+2, NULL, 8);
+											yylval->number = (number_t) ii;
+											return NUMBER;
+										}
+"0"[0-7]+								{
+											unsigned long int ii;
+											ii = strtoul(yytext, NULL, 8);
+											yylval->number = (number_t) ii;
+											return NUMBER;
+										}
+
+
+
+		 /*
+		  * Strings
+		  */
+
+"\""									{ yymore(); BEGIN(STRING_CNST); }
+
+<STRING_CNST>{
+	
+	"\""								{ 
+											yylval->str = yyextra->addString(yytext);
+
+											/* Stop reading string and return it to the parser */
+											BEGIN(INITIAL); 
+											return(STRING); 
+										}
+
+	"\\\""								{ yymore(); }
+
+	.									{ yymore(); }
+
+}
+
+
+
+		 /*
+		  * Symbols
+		  */
+":"([a-zA-Z_][a-zA-Z0-9_]*)				{ /* TODO copiar retornar valor */ }
+
+":'"									{ BEGIN(SYMBOL_STRING_CNST); }
+
+<SYMBOL_STRING_CNST>{
+
+}
+
+
+
+		 /*
+		  * Booleans
+		  */
+
+"true"									{ yylval->boolean = true; return BOOLEAN; }
+
+"false"									{ yylval->boolean = false; return BOOLEAN; }
+
+
+
+
+
+		/*
+		 * Block Comments
+		 */
+
+"//{"									{ 
+											yy_push_state(BLOCK_COMMENT, yyscanner); 
+										}
+
+			/* Illegal block comment start and end sequences */
+("/"+)"//{"								/* Do nothing */
+("/"+)"/}"								/* Do nothing */
+
+
+<BLOCK_COMMENT>{
+	\n									{ /* Let flex handle new lines */ }
+	
+	(\n)"//{"						|
+	([^/\n])"//{"						{ 
+											yy_push_state(BLOCK_COMMENT, yyscanner); 
+										}
+	
+	(\n)"//}"						|
+	([^/\n])"//}"						{
+											yy_pop_state(yyscanner);
+										}
+
+	.										/* Discard character */
+}
 
 
 
@@ -173,44 +296,30 @@ KWB			[ \t\(]
 
 "//"									{ BEGIN(COMMENT); }
 <COMMENT>{
-	.*										/* Discard line */
 	\n									{ BEGIN(INITIAL); }
+	.										/* Discard line */
 }
+
 
 
 
 
 		/*
-		 * Block Comments
+		 * Unknown input
 		 */
-
-"//{"									{ yy_push_state(BLOCK_COMMENT, yyscanner); }
-<BLOCK_COMMENT>{
-	\n									{  }
-	.										/* Discard character */
-	
-	(\n)"//{"							{ 
-											yy_push_state(BLOCK_COMMENT, yyscanner);
-										}
-	([^/\n])"//{"						{ yy_push_state(BLOCK_COMMENT, yyscanner); }
-	
-	(\n)"//}"							{
-											yy_pop_state(yyscanner);
-										}
-	([^/\n])"//}"						{
-											yy_pop_state(yyscanner);
-										}
-}
-
-
-
 .										{ 
 											// TODO: save error string
 											return(LEXER_ERR); 
 										}
 
+<<EOF>>									{ return 0; }
+
 %%
 
+
+/*
+ * Implementation of the scanner initialization functions for the context class
+ */
 
 void Parser_Context::init_scanner  (void)
 {

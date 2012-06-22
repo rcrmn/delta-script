@@ -30,6 +30,23 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* "%code requires" blocks.  */
+
+/* Line 2068 of yacc.c  */
+#line 13 "parser/delta.y"
+
+	
+	/* This include is to get the type for 
+	 * number constants defined in the config file
+	 */
+#include "deltaConfig.h"
+using namespace delta;
+
+
+
+
+/* Line 2068 of yacc.c  */
+#line 50 "parser.yy.hpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -42,20 +59,21 @@
      NAME = 260,
      SYMBOL = 261,
      BOOLEAN = 262,
-     FUN = 263,
-     VAR = 264,
-     PROTOTYPE = 265,
-     IF = 266,
-     ELIF = 267,
-     ELSE = 268,
-     WHILE = 269,
-     FOR = 270,
-     IN = 271,
-     BREAK = 272,
-     CONTINUE = 273,
-     RETURN = 274,
-     END = 275,
-     LEXER_ERR = 276
+     WS = 263,
+     FUN = 264,
+     VAR = 265,
+     PROTOTYPE = 266,
+     IF = 267,
+     ELIF = 268,
+     ELSE = 269,
+     WHILE = 270,
+     FOR = 271,
+     IN = 272,
+     BREAK = 273,
+     CONTINUE = 274,
+     RETURN = 275,
+     END = 276,
+     LEXER_ERR = 277
    };
 #endif
 
@@ -66,18 +84,19 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 20 "parser/delta.y"
+#line 33 "parser/delta.y"
 
-   float number;
-   char* string;
-   char* name;
-   char* symbol;
-   bool boolean;
+   number_t		number;
+   char*		str;
+   char*		name;
+   char*		symbol;
+   char*		long_operator;
+   bool			boolean;
 
 
 
 /* Line 2068 of yacc.c  */
-#line 81 "parser.yy.hpp"
+#line 100 "parser.yy.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

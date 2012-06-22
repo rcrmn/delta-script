@@ -79,8 +79,9 @@
 	/* Empty */
 
 
+
 /* Line 268 of yacc.c  */
-#line 84 "parser.yy.cpp"
+#line 85 "parser.yy.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -100,6 +101,23 @@
 # define YYTOKEN_TABLE 0
 #endif
 
+/* "%code requires" blocks.  */
+
+/* Line 288 of yacc.c  */
+#line 13 "parser/delta.y"
+
+	
+	/* This include is to get the type for 
+	 * number constants defined in the config file
+	 */
+#include "deltaConfig.h"
+using namespace delta;
+
+
+
+
+/* Line 288 of yacc.c  */
+#line 121 "parser.yy.cpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -112,20 +130,21 @@
      NAME = 260,
      SYMBOL = 261,
      BOOLEAN = 262,
-     FUN = 263,
-     VAR = 264,
-     PROTOTYPE = 265,
-     IF = 266,
-     ELIF = 267,
-     ELSE = 268,
-     WHILE = 269,
-     FOR = 270,
-     IN = 271,
-     BREAK = 272,
-     CONTINUE = 273,
-     RETURN = 274,
-     END = 275,
-     LEXER_ERR = 276
+     WS = 263,
+     FUN = 264,
+     VAR = 265,
+     PROTOTYPE = 266,
+     IF = 267,
+     ELIF = 268,
+     ELSE = 269,
+     WHILE = 270,
+     FOR = 271,
+     IN = 272,
+     BREAK = 273,
+     CONTINUE = 274,
+     RETURN = 275,
+     END = 276,
+     LEXER_ERR = 277
    };
 #endif
 
@@ -136,18 +155,19 @@ typedef union YYSTYPE
 {
 
 /* Line 293 of yacc.c  */
-#line 20 "parser/delta.y"
+#line 33 "parser/delta.y"
 
-   float number;
-   char* string;
-   char* name;
-   char* symbol;
-   bool boolean;
+   number_t		number;
+   char*		str;
+   char*		name;
+   char*		symbol;
+   char*		long_operator;
+   bool			boolean;
 
 
 
 /* Line 293 of yacc.c  */
-#line 151 "parser.yy.cpp"
+#line 171 "parser.yy.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -171,10 +191,10 @@ typedef struct YYLTYPE
 /* Copy the second part of user declarations.  */
 
 /* Line 343 of yacc.c  */
-#line 31 "parser/delta.y"
+#line 45 "parser/delta.y"
 
 
-#include "parser.h"
+#include "parserContext.h"
 
 using namespace delta::parser;
 
@@ -182,6 +202,7 @@ using namespace delta::parser;
 #include <sstream>
 
 using namespace std;
+
 
 	/* Lexer declaration */
 int Parser_lex(YYSTYPE* lvalp, YYLTYPE* llocp, void* scanner);
@@ -196,7 +217,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 
 /* Line 343 of yacc.c  */
-#line 200 "parser.yy.cpp"
+#line 221 "parser.yy.cpp"
 
 #ifdef short
 # undef short
@@ -415,22 +436,22 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  6
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1
+#define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  22
+#define YYNTOKENS  23
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  2
+#define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  2
+#define YYNRULES  5
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  4
+#define YYNSTATES  8
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   276
+#define YYMAXUTOK   277
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -465,7 +486,7 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21
+      15,    16,    17,    18,    19,    20,    21,    22
 };
 
 #if YYDEBUG
@@ -473,19 +494,20 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3
+       0,     0,     3,     5,     7,     9
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      23,     0,    -1,     3,    -1
+      24,     0,    -1,     3,    -1,    25,    -1,     4,    -1,     3,
+      17,     3,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    84,    84
+       0,   100,   100,   102,   104,   108
 };
 #endif
 
@@ -495,9 +517,9 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "NUMBER", "STRING", "NAME", "SYMBOL",
-  "BOOLEAN", "FUN", "VAR", "PROTOTYPE", "IF", "ELIF", "ELSE", "WHILE",
-  "FOR", "IN", "BREAK", "CONTINUE", "RETURN", "END", "LEXER_ERR",
-  "$accept", "start", 0
+  "BOOLEAN", "WS", "FUN", "VAR", "PROTOTYPE", "IF", "ELIF", "ELSE",
+  "WHILE", "FOR", "IN", "BREAK", "CONTINUE", "RETURN", "END", "LEXER_ERR",
+  "$accept", "start", "exp", 0
 };
 #endif
 
@@ -508,20 +530,20 @@ static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276
+     275,   276,   277
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    22,    23
+       0,    23,    24,    24,    24,    25
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1
+       0,     2,     1,     1,     1,     3
 };
 
 /* YYDEFACT[STATE-NAME] -- Default reduction number in state STATE-NUM.
@@ -529,27 +551,27 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     2,     0,     1
+       0,     2,     4,     0,     3,     0,     1,     5
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2
+      -1,     3,     4
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -4
+#define YYPACT_NINF -16
 static const yytype_int8 yypact[] =
 {
-      -3,    -4,     1,    -4
+      -3,   -15,   -16,     3,   -16,     1,   -16,   -16
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,    -4
+     -16,   -16,   -16
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -558,25 +580,25 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       1,     3
+       1,     2,     5,     6,     7
 };
 
 #define yypact_value_is_default(yystate) \
-  ((yystate) == (-4))
+  ((yystate) == (-16))
 
 #define yytable_value_is_error(yytable_value) \
   YYID (0)
 
 static const yytype_uint8 yycheck[] =
 {
-       3,     0
+       3,     4,    17,     0,     3
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,    23,     0
+       0,     3,     4,    24,    25,    17,     0,     3
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1462,14 +1484,35 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 85 "parser/delta.y"
+#line 101 "parser/delta.y"
     { context->result = (yyvsp[(1) - (1)].number); }
+    break;
+
+  case 3:
+
+/* Line 1806 of yacc.c  */
+#line 103 "parser/delta.y"
+    { context->result = (yyvsp[(1) - (1)].number); }
+    break;
+
+  case 4:
+
+/* Line 1806 of yacc.c  */
+#line 105 "parser/delta.y"
+    { cout << " >>" << (yyvsp[(1) - (1)].str) << endl; }
+    break;
+
+  case 5:
+
+/* Line 1806 of yacc.c  */
+#line 109 "parser/delta.y"
+    { (yyval.number) = (yyvsp[(1) - (3)].number) + (yyvsp[(3) - (3)].number); }
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1473 "parser.yy.cpp"
+#line 1516 "parser.yy.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1707,7 +1750,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 88 "parser/delta.y"
+#line 111 "parser/delta.y"
 
 
 /* =====================

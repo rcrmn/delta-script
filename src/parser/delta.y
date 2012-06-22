@@ -5,7 +5,20 @@
 
 %{
 	/* Empty */
+
 %}
+
+
+	/* Code included in the generated header file before the union definition */
+%code requires {
+	
+	/* This include is to get the type for 
+	 * number constants defined in the config file
+	 */
+#include "deltaConfig.h"
+using namespace delta;
+
+}
 
 %define api.pure
 %name-prefix "Parser_"
@@ -18,11 +31,12 @@
 
 %union
 {
-   float number;
-   char* string;
-   char* name;
-   char* symbol;
-   bool boolean;
+   number_t		number;
+   char*		str;
+   char*		name;
+   char*		symbol;
+   char*		long_operator;
+   bool			boolean;
 }
 
 
@@ -30,7 +44,7 @@
 
 %{
 
-#include "parser.h"
+#include "parserContext.h"
 
 using namespace delta::parser;
 
@@ -38,6 +52,7 @@ using namespace delta::parser;
 #include <sstream>
 
 using namespace std;
+
 
 	/* Lexer declaration */
 int Parser_lex(YYSTYPE* lvalp, YYLTYPE* llocp, void* scanner);
@@ -53,10 +68,12 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 
 %token <number>   NUMBER
-%token <string>   STRING
+%token <str>   STRING
 %token <name>     NAME
 %token <symbol>   SYMBOL
 %token <boolean>  BOOLEAN
+
+%token WS
 
 %token FUN
 %token VAR
@@ -76,15 +93,21 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %token LEXER_ERR
 
 
-
+%type <number> exp
 
 %%
 
-start:
-	 NUMBER
-			{ context->result = $1; }
+start:	NUMBER
+					{ context->result = $1; }
+	|	exp
+					{ context->result = $1; }
+	|	STRING
+					{ cout << " >>" << $1 << endl; }
+	;
 
-
+exp:   NUMBER IN NUMBER
+			{ $$ = $1 + $3; }
+	;
 %%
 
 /* =====================
