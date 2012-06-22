@@ -81,9 +81,13 @@ KWB			[ \t\(]
 
 {WS}									{ return ' '; }
 
-		/*
-		 *	Special characters
-		 */
+	 /* ===================================
+	  * ===================================
+	  *
+	  * ======== Special Characters
+	  *
+	  * ===================================
+	  * =================================== */
 ":"
 "."
 ";"
@@ -97,9 +101,13 @@ KWB			[ \t\(]
 
 
 
-			/*
-			 *	Operators
-			 */
+	 /* ===================================
+	  * ===================================
+	  *
+	  * ======== Operators
+	  *
+	  * ===================================
+	  * =================================== */
 "|"
 "&"
 "^"
@@ -129,9 +137,20 @@ KWB			[ \t\(]
 
 
 
-		/*
-		 *	Keywords
-		 */
+	 /* ===================================
+	  * ===================================
+	  *
+	  * ======== Keywords
+	  *
+	  * ===================================
+	  * =================================== */
+
+"fun"									{ return FUN; }
+
+"var"									{ return VAR; }
+
+"proto"									{ return PROTOTYPE; }
+
 
 "if"									{ return(IF); }
 "elif"									{ return(ELIF); }
@@ -149,6 +168,8 @@ KWB			[ \t\(]
 "end"									{ return(END); }
 
 
+"return"								{ return RETURN; }
+
 
 
 
@@ -159,13 +180,17 @@ KWB			[ \t\(]
 
 
 
-	/*
-	 *	Constant literals
-	 */
+	 /* ===================================
+	  * ===================================
+	  *
+	  * ======== Constant Literals
+	  *
+	  * ===================================
+	  * =================================== */
 
-		 /*
+		 /* ===============================
 		  * Numbers
-		  */
+		  * =============================== */
 
 
 "0"										|
@@ -210,33 +235,76 @@ KWB			[ \t\(]
 
 
 
-		 /*
+		 /* ===============================
 		  * Strings
-		  */
+		  * =============================== */
+		/*
+"\""									{
+											bool escaped = false;
+											bool ended = false;
+											char c[2];
+											c[1] = 0;
 
-"\""									{ yymore(); BEGIN(STRING_CNST); }
+											yylval->str = yyextra->addString();
+
+											while(!ended)
+											{
+												c[0] = yyinput(yyextra->m_scanner);
+												cout << c << endl;
+												if(c[0] == '"' && !escaped)
+												{
+													ended = true;
+												}
+												else
+												{
+													if(c[0] == '\\' && ! escaped)
+													{
+														escaped = true;
+													}
+													else if(c[0] == '\\')
+													{
+														escaped = false;
+													}
+													else
+													{
+														escaped = false;
+													}
+													yylval->str = yyextra->appendToString(c);
+												}
+											}
+											return STRING;
+										}
+		*/
+	
+"\""									{ yyextra->addString(); BEGIN(STRING_CNST); }
 
 <STRING_CNST>{
 	
-	"\""								{ 
-											yylval->str = yyextra->addString(yytext);
 
-											/* Stop reading string and return it to the parser */
+	\"									{ 
+											yylval->str = yyextra->appendToString(NULL);
+
 											BEGIN(INITIAL); 
 											return(STRING); 
 										}
 
-	"\\\""								{ yymore(); }
+	\\\"								{ 
+											yyextra->appendToString(yytext); 
+										}
 
-	.									{ yymore(); }
+
+
+	[^"]								{
+											yyextra->appendToString(yytext);  
+										}
 
 }
 
 
-
-		 /*
+		 /* ===============================
 		  * Symbols
-		  */
+		  * =============================== */
+
 ":"([a-zA-Z_][a-zA-Z0-9_]*)				{ /* TODO copiar retornar valor */ }
 
 ":'"									{ BEGIN(SYMBOL_STRING_CNST); }
@@ -247,9 +315,9 @@ KWB			[ \t\(]
 
 
 
-		 /*
+		 /* ===============================
 		  * Booleans
-		  */
+		  * =============================== */
 
 "true"									{ yylval->boolean = true; return BOOLEAN; }
 
@@ -259,9 +327,18 @@ KWB			[ \t\(]
 
 
 
-		/*
-		 * Block Comments
-		 */
+	 /* ===================================
+	  * ===================================
+	  *
+	  * ======== Comments
+	  *
+	  * ===================================
+	  * =================================== */
+
+
+		 /* ===============================
+		  * Block Comments
+		  * =============================== */
 
 "//{"									{ 
 											yy_push_state(BLOCK_COMMENT, yyscanner); 
@@ -273,7 +350,7 @@ KWB			[ \t\(]
 
 
 <BLOCK_COMMENT>{
-	\n									{ /* Let flex handle new lines */ }
+	{ENDL}								{ /* Let flex handle new lines */ }
 	
 	(\n)"//{"						|
 	([^/\n])"//{"						{ 
@@ -290,13 +367,13 @@ KWB			[ \t\(]
 
 
 
-		/*
-		 * Single line comments
-		 */
+		 /* ===============================
+		  * Single Line Comments
+		  * =============================== */
 
 "//"									{ BEGIN(COMMENT); }
 <COMMENT>{
-	\n									{ BEGIN(INITIAL); }
+	{ENDL}								{ BEGIN(INITIAL); }
 	.										/* Discard line */
 }
 
@@ -304,13 +381,28 @@ KWB			[ \t\(]
 
 
 
-		/*
-		 * Unknown input
-		 */
+	 /* ===================================
+	  * ===================================
+	  *
+	  * ======== Other Input
+	  *
+	  * ===================================
+	  * =================================== */
+
+
+		 /* ===============================
+		  * Unknown value
+		  * =============================== */
+
 .										{ 
 											// TODO: save error string
 											return(LEXER_ERR); 
 										}
+
+
+		 /* ===============================
+		  * End Of Input
+		  * =============================== */
 
 <<EOF>>									{ return 0; }
 
@@ -321,12 +413,14 @@ KWB			[ \t\(]
  * Implementation of the scanner initialization functions for the context class
  */
 
+/* protected */
 void Parser_Context::init_scanner  (void)
 {
 	yylex_init(&m_scanner);
 	yyset_extra(this, m_scanner);
 }
 
+/* protected */
 void Parser_Context::destroy_scanner  (void)
 {
 	yylex_destroy(m_scanner);

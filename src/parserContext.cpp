@@ -17,6 +17,7 @@ Parser_Context::Parser_Context (std::istream* is)
 {
 	init_scanner();
 	this->m_is = is;
+	this->m_is->unsetf(ios::skipws);
 }
 
 
@@ -42,32 +43,97 @@ Parser_Context::~Parser_Context	(void)
 char*	Parser_Context::addString (const char* or_str, bool stripQuotes)
 {
 
-	char* str, read_str;
-	long int length;
+	str_container_t cont;
+	const char*		read_str;
+	long int		length;
 
-	if(stripQuotes)
+	if(or_str != NULL)
 	{
-		length = strlen(or_str)-2;
-		read_str = or_str+1;
+		if(stripQuotes)
+		{
+			length = strlen(or_str)-2;
+			read_str = or_str+1;
+		}
+		else
+		{
+			length = strlen(or_str);
+			read_str = or_str;
+		}
+    
+		if(length < 40)
+		{
+			cont.len = 40;
+		}
+		else
+		{
+			cont.len = length + 10;
+		}
 	}
 	else
 	{
-		length = strlen(or_str);
-		read_str = or_str;
+		cont.len = 40;
 	}
 
-	str = new char[length+1];
+	cont.str = new char[cont.len];
+
+
+	if(or_str != NULL)
+	{
+		strncpy(cont.str, read_str, length);
+	}
+	else
+	{
+		cont.str[0] = 0;
+	}
 	
-	strcpy(str, read_str);
+	m_strings.push_back(cont);
 	
-	m_strings.push_back(str);
-	
-	return str;
+	return cont.str;
 
 } // addString
 
 
 
+
+
+/* public */
+char*	Parser_Context::appendToString(const char* ap_str)
+{
+	if(ap_str == NULL)
+	{
+		return m_strings.back().str;
+	}
+
+	str_container_t* cont = &(m_strings.back());
+
+	long int newlen = strlen(cont->str) + strlen(ap_str);
+	
+	if(cont->len <= newlen)
+	{
+		char* previous;
+
+		if(cont->len*2 > newlen)
+		{
+			cont->len *= 2;
+		}
+		else
+		{
+			cont->len = newlen + 10;
+		}
+
+		previous = cont->str;
+		cont->str = new char[cont->len];
+		
+		strcpy(cont->str, previous);
+
+		delete[] previous;
+	}
+
+	strcat(cont->str, ap_str);
+
+	return cont->str;
+
+} // appendToString
 
 
 
@@ -76,9 +142,9 @@ char*	Parser_Context::addString (const char* or_str, bool stripQuotes)
 /* protected */
 void	Parser_Context::clear_strings (void)
 {
-	for(std::vector<char*>::iterator it = m_strings.begin(); it != m_strings.end(); ++it)
+	for(std::vector<str_container_t>::iterator it = m_strings.begin(); it != m_strings.end(); ++it)
 	{
-		delete[] (*it);
+		delete[] (*it).str;
 	}
 
 	m_strings.clear();
