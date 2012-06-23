@@ -73,13 +73,15 @@ ENDL		(\n|\r|\r\n)
 	/* KeyWord Boundary */
 KWB			[ \t\(]
 
+END_STMT	[ \t\n\r;]
+
 %%
 
 
 
-{ENDL}									{ return '\n'; }
+(({ENDL}|[[:cntrl:]])({WS}*))+			{ return '\n'; }
 
-{WS}									{ }
+{WS}+									{ }
 
 	 /* ===================================
 	  * ===================================
@@ -88,16 +90,16 @@ KWB			[ \t\(]
 	  *
 	  * ===================================
 	  * =================================== */
-":"
-"."
-";"
-","
-"("
-")"
-"{"
-"}"
-"["
-"]"
+":"									|
+"."									|
+";"									|
+","									|
+"("									|
+")"									|
+"{"									|
+"}"									|
+"["									|
+"]"										{ return yytext[0]; }
 
 
 
@@ -108,32 +110,46 @@ KWB			[ \t\(]
 	  *
 	  * ===================================
 	  * =================================== */
-"|"
-"&"
-"^"
-"*"
-"+"
-"-"
-"/"
-"%"
-"!"
-"="
-"<"
-">"
+"|"									|
+"&"									|
+"^"									|
+"*"									|
+"+"									|
+"-"									|
+"/"									|
+"%"									|
+"!"									|
+"="									|
+"<"									|
+">"										{ return yytext[0]; }
 
-"<="
-">="
-"=="
-"!="
-"++"
-"--"
-"+="
-"-="
-"*="
-"/="
-"&&"
-"||"
-"^^"
+
+
+"<="									{ return LTE; }
+
+">="									{ return GTE; }
+
+"=="									{ return EQ; }
+
+"!="									{ return NEQ; }
+
+"++"									{ return INC; }
+
+"--"									{ return DEC; }
+
+"+="									{ return ADD; }
+
+"-="									{ return SUB; }
+
+"*="									{ return MUL; }
+
+"/="									{ return DIV; }
+
+"&&"									{ return AND; }
+
+"||"									{ return OR; }
+
+"^^"									{ return XOR; }
 
 
 
@@ -145,37 +161,30 @@ KWB			[ \t\(]
 	  * ===================================
 	  * =================================== */
 
-"fun"									{ return FUN; }
+"fun"/{KWB}								{ return FUN; }
 
-"var"									{ return VAR; }
+"var"/{WS}								{ return VAR; }
 
-"proto"									{ return PROTOTYPE; }
-
-
-"if"									{ return(IF); }
-"elif"									{ return(ELIF); }
-"else"									{ return(ELSE); }
-
-"while"									{ return(WHILE); }
-
-"for"									{ return(FOR); }
-"in"									{ return(IN); }
-
-"break"									{ return(BREAK); }
-"continue"								{ return(CONTINUE); }
+"proto"/{KWB}							{ return PROTOTYPE; }
 
 
-"end"									{ return(END); }
+"if"/{KWB}								{ return IF; }
+"elif"/{KWB}							{ return ELIF; }
+"else"/{WS}								{ return ELSE; }
+
+"while"/{KWB}							{ return WHILE; }
+
+"for"/{KWB}								{ return FOR; }
+"in"/{KWB}								{ return IN; }
+
+"break"/{END_STMT}						{ return BREAK; }
+"continue"/{END_STMT}					{ return CONTINUE; }
 
 
-"return"								{ return RETURN; }
+"end"/{END_STMT}						{ return END; }
 
 
-
-
-		/*
-		 *	Symbol names
-		 */
+"return"/{KWB}							{ return RETURN; }
 
 
 
@@ -193,17 +202,27 @@ KWB			[ \t\(]
 		  * =============================== */
 
 
-"0"										|
-[1-9][0-9]*"f"?							|
-[0-9]*"."[0-9]+"f"?						|
-[0-9]+"."("f"?)							{ 
+"0"("f"?)/{WB}						{ 
 											yylval->number = (number_t) atof(yytext); 
-											return(NUMBER); 
+											return NUMBER; 
+										}
+[1-9]([0-9]*)("f"?)/{WB}			{ 
+											yylval->number = (number_t) atof(yytext); 
+											return NUMBER; 
+										}
+[0-9]*"."([0-9]+)("f"?)/{WB}		{ 
+											yylval->number = (number_t) atof(yytext); 
+											return NUMBER; 
+										}
+[0-9]+"."("f"?)/{WB}				{ 
+											yylval->number = (number_t) atof(yytext); 
+											return NUMBER; 
 										}
 
 
+
 			/* Hexadecimal notation */
-"0x"([a-fA-F0-9]+)						{
+"0x"([a-fA-F0-9]+)/{WB}			{
 											unsigned long int ii;
 											ii = strtoul(yytext, NULL, 16);
 											yylval->number = (number_t) ii;
@@ -211,7 +230,7 @@ KWB			[ \t\(]
 										}
 
 		  	/* Binary notation */
-"0b"(0|1)+								{
+"0b"((0|1)+)/{WB}								{
 											unsigned long int ii;
 											ii = strtoul(yytext+2, NULL, 2);
 											yylval->number = (number_t) ii;
@@ -220,13 +239,13 @@ KWB			[ \t\(]
 
 
 			/* Octal notation */
-"0o"[0-7]+								{
+"0o"([0-7]+)/{WB}						{
 											unsigned long int ii;
 											ii = strtoul(yytext+2, NULL, 8);
 											yylval->number = (number_t) ii;
 											return NUMBER;
 										}
-"0"[0-7]+								{
+"0"([0-7]+)/{WB}						{
 											unsigned long int ii;
 											ii = strtoul(yytext, NULL, 8);
 											yylval->number = (number_t) ii;
@@ -241,7 +260,7 @@ KWB			[ \t\(]
 	
 "\""									{ 
 											yyextra->addString(); 
-											BEGIN(STRING_CNST); 
+											BEGIN ( STRING_CNST ); 
 										}
 
 <STRING_CNST>{
@@ -250,8 +269,8 @@ KWB			[ \t\(]
 	\"									{ 
 											yylval->str = yyextra->appendToString(NULL);
 
-											BEGIN(INITIAL); 
-											return(STRING); 
+											BEGIN ( INITIAL ); 
+											return STRING; 
 										}
 
 	\\\"								{ 
@@ -275,26 +294,29 @@ KWB			[ \t\(]
 		  * Symbols
 		  * =============================== */
 
-":"([a-zA-Z_][a-zA-Z0-9_]*)				{
+":"([a-zA-Z_][a-zA-Z0-9_]*)/{WB}		{
 											yylval->str = yyextra->addString(yytext+1);
 
-											return(SYMBOL); 
+											return SYMBOL; 
 										}
 
 
 ":'"									{ 
 											yyextra->addString(); 
-											BEGIN(SYMBOL_STRING_CNST); 
+											BEGIN ( SYMBOL_STRING_CNST ); 
 										}
 
 <SYMBOL_STRING_CNST>{
 
+	[[:cntrl:]]							{ /* Skip all new-line or control characters */ }
+
 	\'									{ 
 											yylval->str = yyextra->appendToString(NULL);
 
-											BEGIN(INITIAL); 
-											return(SYMBOL); 
+											BEGIN ( INITIAL ); 
+											return SYMBOL; 
 										}
+
 
 	\\\'								{ 
 											yyextra->appendToString(yytext); 
@@ -302,7 +324,7 @@ KWB			[ \t\(]
 
 
 
-	[^']								{
+	[^'[:cntrl:]]						{
 											yyextra->appendToString(yytext);  
 										}
 }
@@ -313,9 +335,41 @@ KWB			[ \t\(]
 		  * Booleans
 		  * =============================== */
 
-"true"									{ yylval->boolean = true; return BOOLEAN; }
+"true"/{WB}								{ yylval->boolean = true; return BOOLEAN; }
 
-"false"									{ yylval->boolean = false; return BOOLEAN; }
+"false"/{WB}							{ yylval->boolean = false; return BOOLEAN; }
+
+
+
+
+
+	 /* ===================================
+	  * ===================================
+	  *
+	  * ======== Names
+	  *
+	  * ===================================
+	  * =================================== */
+
+
+		 /* ===============================
+		  * Variables and Functions
+		  * =============================== */
+
+[a-zA-Z_$@][a-zA-Z_$@0-9]*"!"/([^=])		{
+												yylval->name = yyextra->addString(yytext);
+												return NAME;
+											}
+
+[a-zA-Z_$@][a-zA-Z_$@0-9]*("?"|"!?")?/{WB}  {
+												yylval->name = yyextra->addString(yytext);
+												return NAME;
+											}
+
+
+		 /* ===============================
+		  * Constants  TODO
+		  * =============================== */
 
 
 
@@ -365,9 +419,9 @@ KWB			[ \t\(]
 		  * Single Line Comments
 		  * =============================== */
 
-"//"									{ BEGIN(COMMENT); }
+"//"									{ BEGIN ( COMMENT ); }
 <COMMENT>{
-	{ENDL}								{ BEGIN(INITIAL); }
+	{ENDL}								{ BEGIN ( INITIAL ); }
 	.										/* Discard line */
 }
 
@@ -390,7 +444,7 @@ KWB			[ \t\(]
 
 .										{ 
 											// TODO: save error string
-											return(LEXER_ERR); 
+											return LEXER_ERR; 
 										}
 
 

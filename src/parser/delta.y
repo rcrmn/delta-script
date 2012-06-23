@@ -66,7 +66,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %}
 
-
+  /* CONSTANTS */
 %token <number>   NUMBER
 %token <str>	  STRING
 %token <name>     NAME
@@ -75,6 +75,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %token WS
 
+  /* KEYWORDS */
 %token FUN
 %token VAR
 %token PROTOTYPE
@@ -90,37 +91,38 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %token RETURN
 %token END
 
+
+  /* MULTI-CHARACTER OPERATOR */
+%token GTE  /* >= */
+%token LTE  /* <= */
+%token EQ   /* == */
+%token NEQ  /* != */
+
+%token INC  /* ++ */
+%token DEC  /* -- */
+
+%token ADD  /* += */
+%token SUB  /* -= */
+%token MUL  /* *= */
+%token DIV  /* /= */
+
+%token AND  /* && */
+%token OR   /* || */
+%token XOR  /* ^^ */
+
+
+  /* LEXER ERROR */
 %token LEXER_ERR
 
 
-%type <number> in_exp
 
 %%
 
-start:	/* empty */
-	|   start line
-	;
-	 
+start:	NUMBER
+						{ cout << $1 << endl; }
+	 ;
 
-line: '\n'
-	| line '\n'
-	| exp '\n'
-	| error '\n' { yyerrok; }
-	;
 
-exp:	NUMBER 
-					{ cout << "NUMBER = " << $1 << endl; }
-	|	in_exp
-					{ context->result = $1; }
-	|	STRING
-					{ cout << "STRING >> " << $1 << endl; }
-	|	SYMBOL
-					{ cout << "SYMBOL :" << $1 << endl; }
-	;
-
-in_exp:   NUMBER IN NUMBER
-			{ $$ = $1 + $3; }
-	;
 %%
 
 /* =====================

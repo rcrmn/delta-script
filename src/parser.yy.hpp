@@ -73,7 +73,20 @@ using namespace delta;
      CONTINUE = 274,
      RETURN = 275,
      END = 276,
-     LEXER_ERR = 277
+     GTE = 277,
+     LTE = 278,
+     EQ = 279,
+     NEQ = 280,
+     INC = 281,
+     DEC = 282,
+     ADD = 283,
+     SUB = 284,
+     MUL = 285,
+     DIV = 286,
+     AND = 287,
+     OR = 288,
+     XOR = 289,
+     LEXER_ERR = 290
    };
 #endif
 
@@ -96,7 +109,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 100 "parser.yy.hpp"
+#line 113 "parser.yy.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
