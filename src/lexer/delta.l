@@ -79,7 +79,7 @@ KWB			[ \t\(]
 
 {ENDL}									{ return '\n'; }
 
-{WS}									{ return ' '; }
+{WS}									{ }
 
 	 /* ===================================
 	  * ===================================
@@ -238,45 +238,11 @@ KWB			[ \t\(]
 		 /* ===============================
 		  * Strings
 		  * =============================== */
-		/*
-"\""									{
-											bool escaped = false;
-											bool ended = false;
-											char c[2];
-											c[1] = 0;
-
-											yylval->str = yyextra->addString();
-
-											while(!ended)
-											{
-												c[0] = yyinput(yyextra->m_scanner);
-												cout << c << endl;
-												if(c[0] == '"' && !escaped)
-												{
-													ended = true;
-												}
-												else
-												{
-													if(c[0] == '\\' && ! escaped)
-													{
-														escaped = true;
-													}
-													else if(c[0] == '\\')
-													{
-														escaped = false;
-													}
-													else
-													{
-														escaped = false;
-													}
-													yylval->str = yyextra->appendToString(c);
-												}
-											}
-											return STRING;
-										}
-		*/
 	
-"\""									{ yyextra->addString(); BEGIN(STRING_CNST); }
+"\""									{ 
+											yyextra->addString(); 
+											BEGIN(STRING_CNST); 
+										}
 
 <STRING_CNST>{
 	
@@ -294,8 +260,12 @@ KWB			[ \t\(]
 
 
 
-	[^"]								{
+	[^"\n\r]							{
 											yyextra->appendToString(yytext);  
+										}
+
+	[\n\r]								{
+											return LEXER_ERR;
 										}
 
 }
@@ -305,12 +275,36 @@ KWB			[ \t\(]
 		  * Symbols
 		  * =============================== */
 
-":"([a-zA-Z_][a-zA-Z0-9_]*)				{ /* TODO copiar retornar valor */ }
+":"([a-zA-Z_][a-zA-Z0-9_]*)				{
+											yylval->str = yyextra->addString(yytext+1);
 
-":'"									{ BEGIN(SYMBOL_STRING_CNST); }
+											return(SYMBOL); 
+										}
+
+
+":'"									{ 
+											yyextra->addString(); 
+											BEGIN(SYMBOL_STRING_CNST); 
+										}
 
 <SYMBOL_STRING_CNST>{
 
+	\'									{ 
+											yylval->str = yyextra->appendToString(NULL);
+
+											BEGIN(INITIAL); 
+											return(SYMBOL); 
+										}
+
+	\\\'								{ 
+											yyextra->appendToString(yytext); 
+										}
+
+
+
+	[^']								{
+											yyextra->appendToString(yytext);  
+										}
 }
 
 
@@ -340,14 +334,14 @@ KWB			[ \t\(]
 		  * Block Comments
 		  * =============================== */
 
+
+			/* Illegal block comment start and end sequences */
+("/"+)"//{"								{ /* do nothing */ }
+("/"+)"/}"								{ /* do nothing */ }
+
 "//{"									{ 
 											yy_push_state(BLOCK_COMMENT, yyscanner); 
 										}
-
-			/* Illegal block comment start and end sequences */
-("/"+)"//{"								/* Do nothing */
-("/"+)"/}"								/* Do nothing */
-
 
 <BLOCK_COMMENT>{
 	{ENDL}								{ /* Let flex handle new lines */ }

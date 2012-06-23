@@ -68,7 +68,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 
 %token <number>   NUMBER
-%token <str>   STRING
+%token <str>	  STRING
 %token <name>     NAME
 %token <symbol>   SYMBOL
 %token <boolean>  BOOLEAN
@@ -93,19 +93,32 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %token LEXER_ERR
 
 
-%type <number> exp
+%type <number> in_exp
 
 %%
 
-start:	NUMBER
-					{ context->result = $1; }
-	|	exp
-					{ context->result = $1; }
-	|	STRING
-					{ cout << " >>" << $1 << endl; }
+start:	/* empty */
+	|   start line
+	;
+	 
+
+line: '\n'
+	| line '\n'
+	| exp '\n'
+	| error '\n' { yyerrok; }
 	;
 
-exp:   NUMBER IN NUMBER
+exp:	NUMBER 
+					{ cout << "NUMBER = " << $1 << endl; }
+	|	in_exp
+					{ context->result = $1; }
+	|	STRING
+					{ cout << "STRING >> " << $1 << endl; }
+	|	SYMBOL
+					{ cout << "SYMBOL :" << $1 << endl; }
+	;
+
+in_exp:   NUMBER IN NUMBER
 			{ $$ = $1 + $3; }
 	;
 %%

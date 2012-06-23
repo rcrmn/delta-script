@@ -17,7 +17,7 @@ Parser_Context::Parser_Context (std::istream* is)
 {
 	init_scanner();
 	this->m_is = is;
-	this->m_is->unsetf(ios::skipws);
+	this->m_is->unsetf(ios::skipws); // And fucking stay like this forever!
 }
 
 
@@ -80,6 +80,7 @@ char*	Parser_Context::addString (const char* or_str, bool stripQuotes)
 	if(or_str != NULL)
 	{
 		strncpy(cont.str, read_str, length);
+		cont.str[length] = 0;
 	}
 	else
 	{
@@ -142,8 +143,10 @@ char*	Parser_Context::appendToString(const char* ap_str)
 /* protected */
 void	Parser_Context::clear_strings (void)
 {
+	cout << "Clearing strings." << endl;
 	for(std::vector<str_container_t>::iterator it = m_strings.begin(); it != m_strings.end(); ++it)
 	{
+		cout << (*it).len << "  "<< (*it).str << endl;
 		delete[] (*it).str;
 	}
 

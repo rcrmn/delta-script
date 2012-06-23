@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <cstdio>
-#include <sstream>
+#include <fstream>
 #include "parserContext.h"
 
 #define INPUT_FILE "test.dt"
@@ -20,9 +20,9 @@ int main (int argc, const char * argv[])
 
 	cout << "Hello, World!\n";
 
-	istringstream iss("\"hola mon\"");
+	ifstream fs("test.dt");
 
-	delta::parser::Parser_Context context(&iss);
+	delta::parser::Parser_Context context(&fs);
 
 	if(!Parser_parse(&context))
 	{
