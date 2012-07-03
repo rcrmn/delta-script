@@ -115,12 +115,135 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %token LEXER_ERR
 
 
+/* Operator Precedence and associativity */
+%right '='
+
+%left  '+' '-'
+
+%left  '*' '/'
+
 
 %%
 
-start:	NUMBER
-						{ cout << $1 << endl; }
+start:			expression start
+	 |			/* empty */
 	 ;
+
+
+expression:		const_val /* TODO: this one doesn't belong here. For testing purposes only. */
+	|			assign_expr
+	|			fun_call
+
+	|			var_def
+	|			fun_def
+	|			proto_def
+	|			if_stmt
+	|			for_stmt
+	|			while_stmt
+	;
+
+		/* Assignment expression. Like a = 3 or b += 1 */
+assign_expr:	slot assign_oper value
+	;
+
+
+		/* Slot of an object. Either variable or function. */
+slot:			NAME  /* TODO: Save the name used */
+	|			NAME '.' NAME
+	|			const_val '.' NAME
+	;
+
+
+		/* Assignment operator */
+		/* TODO: Save the kind of operator used */
+assign_oper:	'=' 
+	|			ADD
+	|			SUB
+	|			MUL
+	|			DIV
+	;
+
+
+		/* Something that can be a parameter of a function call */
+inner_value:	slot
+	|			const_val
+	|			par_fun_call
+	|			operation
+	|			'(' value ')'
+	;
+
+
+		/* An expression that has a value */
+value:			fun_call
+	|			inner_value
+	;
+
+
+		/* Operators */
+operation:		inner_value '+' inner_value
+		 /* TODO: add the rest */
+	;
+
+
+fun_call:		slot param_list
+	|			par_fun_call
+	;
+
+
+par_fun_call:	slot '(' param_list ')'
+	;
+
+
+param_list:		/* empty */
+	|			inner_value
+	;
+
+
+
+const_val:		NUMBER  /* TODO: save the values */
+						{ cout << $1 << endl; }
+	|			STRING
+						{ cout << $1 << endl; }
+	|			BOOLEAN
+						{ cout << $1 << endl; }
+	|			SYMBOL
+						{ cout << $1 << endl; }
+	;
+
+
+var_def:		/* TODO */
+	;
+
+fun_def:		/* TODO */
+	;
+
+proto_def:		/* TODO */
+	;
+
+if_stmt:		/* TODO */
+	;
+
+while_stmt:		/* TODO */
+	;
+
+for_stmt:		/* TODO */
+	;
+
+
+lambda_fun:		/* TODO*/
+	;
+
+
+
+array_def:		/* TODO */
+	;
+
+range_def:		/* TODO */
+	;
+
+map_def:		/* TODO */
+	;
+
 
 
 %%

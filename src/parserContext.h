@@ -14,6 +14,9 @@
 namespace delta {
 	namespace parser {
 
+		class Parser;
+
+
 /** Parser_Context
  * This class is used to maintain the state of the parser and lexer
  * throughout their execution.
@@ -34,6 +37,12 @@ namespace delta {
  * Used by the lexer and parser to keep the state of the lexer.
  */
 				void*				m_scanner;
+
+/** m_parser
+ * Contains a reference to the parser that created this Context.
+ */
+				Parser*				m_parser;
+
 
 /** m_is
  * Contains the input stream for the lexer.

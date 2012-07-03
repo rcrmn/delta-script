@@ -79,7 +79,7 @@ END_STMT	[ \t\n\r;]
 
 
 
-(({ENDL}|[[:cntrl:]])({WS}*))+			{ return '\n'; }
+(({ENDL}|[[:cntrl:]])({WS}*))+			{ }
 
 {WS}+									{ }
 
@@ -279,12 +279,8 @@ END_STMT	[ \t\n\r;]
 
 
 
-	[^"\n\r]							{
+	[^"]								{
 											yyextra->appendToString(yytext);  
-										}
-
-	[\n\r]								{
-											return LEXER_ERR;
 										}
 
 }

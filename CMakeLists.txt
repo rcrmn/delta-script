@@ -61,12 +61,20 @@ add_custom_target(parserc DEPENDS src/parser.yy.cpp)
 # ================================================================
 
 # Get all the files inside the src and src/lexer directories, relative to the root.
-file(GLOB C_SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp" "src/*.c")
+file(GLOB C_SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp" "src/*.cc" "src/*.c")
 
 list(APPEND C_SOURCE_FILES "src/lex.yy.cpp" "src/parser.yy.cpp")
 
 list(REMOVE_DUPLICATES C_SOURCE_FILES)
 message("In dir src/:         ${C_SOURCE_FILES}")
+
+
+file(GLOB C_PARSER_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/parser/*.cpp" "src/parser/*.cc" "src/parser/*.c")
+
+message("In dir src/parser/:         ${C_PARSER_FILES}")
+
+
+list(APPEND C_SOURCE_FILES ${C_PARSER_FILES})
 
 set(ALL_SOURCES ${C_SOURCE_FILES})
 
