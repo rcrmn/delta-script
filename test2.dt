@@ -19,5 +19,5 @@ a.value ()
 
 c.d.e += pow (hey.this.is.slot, a.value (e) + tan(a.value))
 
-//c.d.e /= pow hey.this.is.slot, (a.value e) + tan (a.value)
+c.d.e /= pow hey.this.is.slot, (a.value e) + tan (a.value)
 

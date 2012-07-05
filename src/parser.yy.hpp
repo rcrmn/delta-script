@@ -102,7 +102,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2663 of glr.c  */
-#line 41 "parser/delta.y"
+#line 48 "parser/delta.y"
 
    number_t		number;
    char*		str;

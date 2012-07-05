@@ -25,7 +25,9 @@ namespace delta {
 }
 
 }
-
+/*
+%debug
+*/
 %define api.pure
 %name-prefix "Parser_"
 %locations
@@ -36,6 +38,11 @@ namespace delta {
 
 %parse-param { Parser_Context* context }
 %lex-param { void* scanner }
+
+%initial-action
+{
+	/* yydebug = 1; */
+};
 
 %union
 {
@@ -160,6 +167,9 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %%
 
+white_start:	'\n' white_start
+	|			start
+;
 
 start:			expression 
 										{ context->ast->addExpression($1); }
@@ -182,31 +192,36 @@ expression:		/*const_val  TODO: this one doesn't belong here. For testing purpos
 	|			for_stmt
 	|			while_stmt
 			*/
+	|			expression ';'			{ $$ = $1; }
+	|			expression '\n'			{ $$ = $1; }
 ;
 
 
+nl:				/* empty */
+	|			'\n'
+;
 
 
 		/* Assignment expression. Like a = 3 or b += 1 */
-assign_expr:	slot '=' value
+assign_expr:	slot nl '=' nl value
 										{
-											$$ = new AstNodeOperator($1, AstNodeOperator::Assign, $3);
+											$$ = new AstNodeOperator($1, AstNodeOperator::Assign, $5);
 										}
-	|			slot ADD value
+	|			slot nl ADD nl value
 										{
-											$$ = new AstNodeOperator($1, AstNodeOperator::AssignAdd, $3);
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignAdd, $5);
 										}
-	|			slot SUB value 
+	|			slot nl SUB nl value 
 										{
-											$$ = new AstNodeOperator($1, AstNodeOperator::AssignSubs, $3);
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignSubs, $5);
 										}
-	|			slot MUL value
+	|			slot nl MUL nl value
 										{
-											$$ = new AstNodeOperator($1, AstNodeOperator::AssignMult, $3);
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignMult, $5);
 										}
-	|			slot DIV value
+	|			slot nl DIV nl value
 										{
-											$$ = new AstNodeOperator($1, AstNodeOperator::AssignDiv, $3);
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignDiv, $5);
 										}
 ;
 
@@ -221,20 +236,20 @@ slot:			NAME
 ;
 
 		/* Operators */
-operation:		inner_value '+' value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $3); }
-	|			inner_value '-' value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $3); }
-	|			inner_value '*' value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $3); }
-	|			inner_value '/' value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $3); }
-	|			inner_value OR  value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $3); }
-	|			inner_value AND value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $3); }
-	|			inner_value XOR value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $3); }
+operation:		inner_value nl '+' nl value
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $5); }
+	|			inner_value nl '-' nl value
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $5); }
+	|			inner_value nl '*' nl value
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $5); }
+	|			inner_value nl '/' nl value
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $5); }
+	|			inner_value nl OR  nl value
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
+	|			inner_value nl AND nl value
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
+	|			inner_value nl XOR nl value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
 ;
 
 
@@ -263,12 +278,14 @@ fun_call:		slot
 											AstNodeFunCall* f = new AstNodeFunCall($1);
 											$$ = f;
 										}
-	|			slot param_list				
+	|			slot param_list		%dprec 2	
 										{ 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($2);
 											f->setSlot($1);
 											$$ = f;
 										} 
+	|			par_fun_call		%dprec 1	
+										{ $$ = $1; }
 ;
 
 
@@ -290,9 +307,9 @@ par_fun_call:	slot '(' ')'
 
 
 
-param_list:		inner_value ',' param_list
+param_list:		inner_value nl ',' nl param_list
 										{ 
-											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($3);
+											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($5);
 											f->addParam($1);
 											$$ = f;
 										}

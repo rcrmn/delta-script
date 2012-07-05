@@ -79,7 +79,7 @@ END_STMT	[ \t\n\r;]
 
 
 
-(({ENDL}|[[:cntrl:]])({WS}*))+			{ }
+({ENDL}(({WS}|[[:cntrl:]])*))+			{ return '\n'; }
 
 {WS}+									{ }
 

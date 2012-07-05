@@ -23,9 +23,9 @@ using namespace std;
 int Parser_parse(delta::parser::Parser_Context* context);
 */
 
+
 int main (int argc, const char * argv[])
 {
-
 	cout << "Hello, World!\n";
 	ifstream fs(INPUT_FILE);
 
