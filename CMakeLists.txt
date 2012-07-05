@@ -42,7 +42,7 @@ add_custom_target(lexerc DEPENDS src/lex.yy.cpp)
 # Execute the parser generator (bison) to get the latest changes applied
 
 add_custom_command(OUTPUT src/parser.yy.cpp src/parser.yy.hpp
-					COMMAND bison -o parser.yy.cpp parser/delta.y
+					COMMAND bison -v -o parser.yy.cpp parser/delta.y
 					MAIN_DEPENDENCY src/parser/delta.y
 					WORKING_DIRECTORY src
 					COMMENT "Generating the parser engine (bison).")

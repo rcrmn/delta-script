@@ -34,9 +34,9 @@ namespace delta {
 
 				inline AstNode* getSlot() { return m_name; }
 
-				inline AstNode* getParam(int i) { return m_params[m_params.size()-i-1]; }
+				inline AstNode* getParam(int i) const { return m_params[m_params.size()-i-1]; }
 
-				inline size_t getParamsCount() { return m_params.size(); }
+				inline size_t getParamsCount() const { return m_params.size(); }
 
 
 				virtual void test() const 
@@ -45,13 +45,11 @@ namespace delta {
 					m_name->test(); 
 					std::cout << "} <- ("; 
 
-					std::vector<AstNode*>::const_iterator it;
+					int i;
 
-					for(it = m_params.begin(); 
-							it != m_params.end(); 
-							++it)
+					for(i=0; i<getParamsCount(); ++i)
 					{
-						(*it)->test();
+						getParam(i)->test();
 						std::cout << "$$";
 					}
 					std::cout << ") ";

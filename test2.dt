@@ -5,7 +5,13 @@ a.value = 2
 
 hey.this.is.slot = a.value + 33
 
+print "hello1"
+
 print ("hello")
 
 var b = sum (1, 2,3)
+
+c.d.e = pow hey.this.is.slot, a.value + tan a.value
+
+c.d.e = pow (hey.this.is.slot, a.value + tan(a.value))
 

@@ -227,7 +227,7 @@ value:			inner_value				{ $$ = $1; }
 
 
 		/* Operators */
-operation:		inner_value '+' inner_value
+operation:		inner_value '+' value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $3); }
 		 /* TODO: add the rest */
 ;
