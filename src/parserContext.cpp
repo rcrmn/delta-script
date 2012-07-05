@@ -1,14 +1,18 @@
 #include "parserContext.h"
+
+#include "parser.h"
+
+#include "parser/abstractSyntaxTree.h"
+
+
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
-namespace delta
-{
-namespace parser
-{
+using namespace delta;
 
-
+using namespace delta::parser;
 
 
 
@@ -17,6 +21,8 @@ Parser_Context::Parser_Context (std::istream* is)
 {
 	init_scanner();
 	this->m_is = is;
+
+	// To avoid the stream stripping white-spaces
 	this->m_is->unsetf(ios::skipws); // And fucking stay like this forever!
 }
 
@@ -157,5 +163,3 @@ void	Parser_Context::clear_strings (void)
 
 
 
-} // namespace parser
-} // namespace delta

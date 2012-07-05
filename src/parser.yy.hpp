@@ -1,8 +1,8 @@
 /* A Bison parser, made by GNU Bison 2.5.  */
 
-/* Bison interface for Yacc-like parsers in C
+/* Skeleton interface for Bison GLR parsers in C
    
-      Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
+      Copyright (C) 2002-2011 Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 
 /* "%code requires" blocks.  */
 
-/* Line 2068 of yacc.c  */
+/* Line 2663 of glr.c  */
 #line 13 "parser/delta.y"
 
 	
@@ -42,11 +42,17 @@
 #include "deltaConfig.h"
 using namespace delta;
 
+namespace delta {
+	namespace parser {
+		class AstNode;
+	}
+}
 
 
 
-/* Line 2068 of yacc.c  */
-#line 50 "parser.yy.hpp"
+
+/* Line 2663 of glr.c  */
+#line 56 "parser.yy.hpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -91,13 +97,12 @@ using namespace delta;
 #endif
 
 
-
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+#ifndef YYSTYPE
 typedef union YYSTYPE
 {
 
-/* Line 2068 of yacc.c  */
-#line 33 "parser/delta.y"
+/* Line 2663 of glr.c  */
+#line 41 "parser/delta.y"
 
    number_t		number;
    char*		str;
@@ -105,31 +110,34 @@ typedef union YYSTYPE
    char*		symbol;
    char*		long_operator;
    bool			boolean;
+   delta::parser::AstNode*		node;
 
 
 
-/* Line 2068 of yacc.c  */
-#line 113 "parser.yy.hpp"
+/* Line 2663 of glr.c  */
+#line 119 "parser.yy.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
 #endif
-
-
 
 #if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
 typedef struct YYLTYPE
 {
+
   int first_line;
   int first_column;
   int last_line;
   int last_column;
+
 } YYLTYPE;
-# define yyltype YYLTYPE /* obsolescent; will be withdrawn */
 # define YYLTYPE_IS_DECLARED 1
 # define YYLTYPE_IS_TRIVIAL 1
 #endif
+
+
+
+
+
 
 
 

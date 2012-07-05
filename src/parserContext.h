@@ -4,17 +4,17 @@
 
 
 #pragma once
-#if !defined(__PARSER_H__)
-#define __PARSER_H__
+#if !defined(__PARSER_CONTEXT_H__)
+#define __PARSER_CONTEXT_H__
 
 #include <iostream>
 #include <vector>
-#include <cstring>
 
 namespace delta {
 	namespace parser {
 
 		class Parser;
+		class AbstractSyntaxTree;
 
 
 /** Parser_Context
@@ -50,6 +50,13 @@ namespace delta {
 				std::istream*		m_is;
 
 
+/** ast
+ * Contains the syntax tree.
+ */
+				AbstractSyntaxTree* ast;
+
+
+
 				int result;
 
 
@@ -57,11 +64,11 @@ namespace delta {
 /** constructor
  * @param is contains the input stream to be used by this parser.
  */
-				Parser_Context			(std::istream* is = &std::cin);
+				Parser_Context		(std::istream* is = &std::cin);
 
 /** destructor
  */
-				virtual ~Parser_Context	(void);
+				~Parser_Context	(void);
 				
 
 /** addString

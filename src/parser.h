@@ -8,10 +8,13 @@
 #if ! defined __PARSER_H__
 #define __PARSER_H__
 
+#include <iostream>
+
 namespace delta {
 	namespace parser {
 
 		class Parser_Context;
+		class AbstractSyntaxTree;
 
 	/** Parser
 	 * Reads from an input stream and extracts an Abstract Syntax Tree from it.
@@ -21,10 +24,12 @@ namespace delta {
 		public:
 			Parser();
 
+			void parse(std::istream* file);
 
 		private:
 			Parser_Context*			m_engineContext;
-
+			
+			AbstractSyntaxTree*		m_syntaxTree;
 
 		};
 

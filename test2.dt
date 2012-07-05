@@ -1,0 +1,11 @@
+
+var a = Object
+
+a.value = 2
+
+hey.this.is.slot = a.value + 33
+
+print ("hello")
+
+var b = sum (1, 2,3)
+

@@ -74,10 +74,10 @@ file(GLOB C_PARSER_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/parser/*.cpp"
 message("In dir src/parser/:         ${C_PARSER_FILES}")
 
 
-list(APPEND C_SOURCE_FILES ${C_PARSER_FILES})
 
-set(ALL_SOURCES ${C_SOURCE_FILES})
+set(ALL_SOURCES ${C_PARSER_FILES})
 
+list(APPEND ALL_SOURCES ${C_SOURCE_FILES})
 
 # ================================================================
 # 

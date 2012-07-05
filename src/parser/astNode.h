@@ -8,6 +8,8 @@
 #if ! defined __PARSER_AST_NODE_H__
 #define __PARSER_AST_NODE_H__
 
+#include <iostream>
+
 namespace delta {
 	namespace parser {
 
@@ -18,22 +20,26 @@ namespace delta {
 			Boolean,
 			Range,
 			Array,
-			Map,
-
-			Name,
-			FunctionCall,
+			Map, 
+			Slot, 
+			ConstSlot,
+			FunctionCall, 
 			Block,
 			IfBlock,
 			WhileBlock,
 			ForBlock,
 			FunctionBlock,
 			ProtoBlock,
+			SlotDecl,
+			Operator,
 		};
 
-		class ParserAstNode
+		class AstNode
 		{
 			public:
 				virtual AstNodeType getType() const = 0;
+
+				virtual void test() const {};
 		};
 
 	} // namespace delta

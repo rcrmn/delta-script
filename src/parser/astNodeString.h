@@ -8,28 +8,31 @@
 #if ! defined __PARSER_AST_NODE_STRING_H__
 #define __PARSER_AST_NODE_STRING_H__
 
-#include "deltaConfig.h"
-#include "parserAstNode.h"
+#include "../deltaConfig.h"
+#include "astNode.h"
 #include <string>
 
 namespace delta {
 	namespace parser {
 
-		class ParserAstNodeString : public ParserAstNode
+		class AstNodeString : public AstNode
 		{
 			public:
 				
-				ParserAstNodeString() { m_str = ""; };
+				AstNodeString() { m_str = ""; };
 
-				ParserAstNodeString(const char* str) { m_str = str; };
+				AstNodeString(const char* str) { m_str = str; };
 
-				ParserAstNodeString(const std::string& str) { m_str = str; };
+				AstNodeString(const std::string& str) { m_str = str; };
 
 				AstNodeType getType() const { return String; };
 
 				inline const std::string& getString() const { return m_str; };
 
-				inline setString(const std::string& str) { m_str = str; };
+				inline void setString(const std::string& str) { m_str = str; };
+
+
+				virtual void test() const { std::cout << " String \"" << m_str << "\" "; }
 
 			private:
 
