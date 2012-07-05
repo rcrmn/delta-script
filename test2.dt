@@ -13,9 +13,11 @@ var b = sum (1, 2,3)
 
 //}
 
-c.d.e = pow hey.this.is.slot, a.value (e) + tan a.value
+c.d.e = pow hey.this.is.slot, a.value ((((e)))) + tan
 
-c.d.e = pow (hey.this.is.slot, a.value (e) + tan(a.value))
+a.value ()
 
-c.d.e = pow hey.this.is.slot, (a.value e) + tan (a.value)
+c.d.e += pow (hey.this.is.slot, a.value (e) + tan(a.value))
+
+//c.d.e /= pow hey.this.is.slot, (a.value e) + tan (a.value)
 

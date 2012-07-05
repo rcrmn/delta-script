@@ -160,6 +160,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %%
 
+
 start:			expression 
 										{ context->ast->addExpression($1); }
 					start
@@ -183,15 +184,30 @@ expression:		/*const_val  TODO: this one doesn't belong here. For testing purpos
 			*/
 ;
 
+
+
+
 		/* Assignment expression. Like a = 3 or b += 1 */
 assign_expr:	slot '=' value
 										{
 											$$ = new AstNodeOperator($1, AstNodeOperator::Assign, $3);
 										}
-	|			slot ADD value  /* TODO */
-	|			slot SUB value
+	|			slot ADD value
+										{
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignAdd, $3);
+										}
+	|			slot SUB value 
+										{
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignSubs, $3);
+										}
 	|			slot MUL value
+										{
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignMult, $3);
+										}
 	|			slot DIV value
+										{
+											$$ = new AstNodeOperator($1, AstNodeOperator::AssignDiv, $3);
+										}
 ;
 
 
@@ -206,17 +222,17 @@ slot:			NAME
 
 		/* Operators */
 operation:		inner_value '+' value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $3); }
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $3); }
 	|			inner_value '-' value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $3); }
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $3); }
 	|			inner_value '*' value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $3); }
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $3); }
 	|			inner_value '/' value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $3); }
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $3); }
 	|			inner_value OR  value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $3); }
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $3); }
 	|			inner_value AND value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $3); }
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $3); }
 	|			inner_value XOR value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $3); }
 ;
@@ -236,13 +252,18 @@ inner_value:	slot					{ $$ = $1; }
 		/* An expression that has a value */
 value:			inner_value		%dprec 1
 										{ $$ = $1; }
-	|			fun_call		%dprec 2		
+	|			fun_call		%dprec 2			/* When finding a ')' suppose it belongs to a function call (where there is only one parameter) */	
 										{ $$ = $1; }
 ;
 
 
 
-fun_call:		slot param_list				
+fun_call:		slot
+										{
+											AstNodeFunCall* f = new AstNodeFunCall($1);
+											$$ = f;
+										}
+	|			slot param_list				
 										{ 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($2);
 											f->setSlot($1);
@@ -252,7 +273,13 @@ fun_call:		slot param_list
 
 
 
-par_fun_call:	slot '(' param_list ')'		
+par_fun_call:	slot '(' ')'
+										{
+											AstNodeFunCall* f = new AstNodeFunCall($1);
+											$$ = f;
+										}
+	
+	|			slot '(' param_list ')'		
 										{
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($3);
 											f->setSlot($1);
