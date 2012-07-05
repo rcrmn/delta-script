@@ -30,6 +30,9 @@ namespace delta {
 					Subs,
 					Mult,
 					Div,
+					Or,
+					Xor,
+					And,
 				};
 				
 				AstNodeOperator() {};

@@ -145,7 +145,6 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> fun_call
 %type <node> par_fun_call
 %type <node> param_list
-%type <node> more_params
 %type <node> const_val
 %type <node> var_def
 %type <node> fun_def
@@ -205,71 +204,73 @@ slot:			NAME
 										{ $$ = new AstNodeConstSlot($1, $3); }
 ;
 
-
-		/* Something that can be a parameter of a function call */
-inner_value:	slot
-										{ $$ = $1; }
-	|			const_val 
-										{ $$ = $1; }
-					/*
-	|			par_fun_call */
-	|			operation 
-										{ $$ = $1; }
-	|			'(' value ')'
-										{ $$ = $2; }
-	;
-
-
-		/* An expression that has a value */
-value:			inner_value				{ $$ = $1; }
-	|			fun_call				{ $$ = $1; }
-	;
-
-
 		/* Operators */
 operation:		inner_value '+' value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $3); }
-		 /* TODO: add the rest */
+	|			inner_value '-' value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $3); }
+	|			inner_value '*' value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $3); }
+	|			inner_value '/' value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $3); }
+	|			inner_value OR  value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $3); }
+	|			inner_value AND value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $3); }
+	|			inner_value XOR value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $3); }
 ;
 
 
-fun_call:		slot param_list			{ 
+		/* Something that can be a parameter of a function call */
+inner_value:	slot					{ $$ = $1; } 
+	|			'(' value ')'	
+										{ $$ = $2; } 
+	|			const_val				{ $$ = $1; } 
+	|			par_fun_call	
+										{ $$ = $1; } 
+	|			operation				{ $$ = $1; }
+;
+
+
+		/* An expression that has a value */
+value:			inner_value		%dprec 1
+										{ $$ = $1; }
+	|			fun_call		%dprec 2		
+										{ $$ = $1; }
+;
+
+
+
+fun_call:		slot param_list				
+										{ 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($2);
 											f->setSlot($1);
 											$$ = f;
-										}
-	|			slot inner_value		{ 
-											AstNodeFunCall* f = new AstNodeFunCall($1);
-											f->addParam($2);
-											$$ = f;
-										}
-	|			par_fun_call			{ $$ = $1; } 
+										} 
 ;
 
 
-par_fun_call:	slot '(' param_list ')' {
+
+par_fun_call:	slot '(' param_list ')'		
+										{
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($3);
 											f->setSlot($1);
 											$$ = f;
-										}
+										} 
+
 ;
 
 
-param_list:		inner_value ',' more_params
+
+param_list:		inner_value ',' param_list
 										{ 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($3);
 											f->addParam($1);
 											$$ = f;
 										}
-;
-
-more_params:	inner_value ',' more_params
+	|			inner_value		
 										{ 
-											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($3);
-											f->addParam($1);
-											$$ = f;
-										}
-	|			inner_value				{ 
 											AstNodeFunCall* f = new AstNodeFunCall();
 											f->addParam($1);
 											$$ = f;
