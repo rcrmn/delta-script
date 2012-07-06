@@ -31,6 +31,11 @@ namespace delta {
 
 				inline void setString(const std::string& str) { m_str = str; };
 
+				
+				virtual void test() const 
+				{
+					std::cout << " Symbol( :'" << m_str << "' ) ";
+				}
 			private:
 
 				std::string m_str;

@@ -20,25 +20,30 @@ namespace delta {
 				
 				AstNodeRange() : m_start(0), m_end(0), m_step(0) {};
 
-				AstNodeRange(number_t start, number_t end) : m_start(start), m_end(end), m_step(1) {};
+				AstNodeRange(AstNode* start, AstNode* end) : m_start(start), m_end(end), m_step(0) {};
 
-				AstNodeRange(number_t start, number_t end, number_t step) : m_start(start), m_end(end), m_step(step) {};
+				AstNodeRange(AstNode* start, AstNode* end, AstNode* step) : m_start(start), m_end(end), m_step(step) {};
 
 
 				AstNodeType getType() const { return Range; };
 
-				inline number_t getRangeStart() const { return m_start; };
+				inline AstNode* getRangeStart() const { return m_start; };
 
-				inline number_t getRangeEnd() const { return m_end; };
+				inline AstNode* getRangeEnd() const { return m_end; };
 
-				inline number_t getRangeStep() const { return m_step; };
+				inline AstNode* getRangeStep() const { return m_step; };
 
-				inline void setRange(number_t start, number_t end, number_t step) { m_start = start; m_end = end; m_step = step; };
-				inline void setRange(number_t start, number_t end) { setRange(start, end, 1); };
+				inline void setRange(AstNode* start, AstNode* end, AstNode* step) { m_start = start; m_end = end; m_step = step; };
+				inline void setRange(AstNode* start, AstNode* end) { setRange(start, end, 0); };
+
+				virtual void test() const 
+				{ 
+					std::cout << "Range[ "; m_start->test(); std::cout << ".."; if(m_step != 0) { m_step->test(); std::cout << ".."; } m_end->test(); std::cout << " ]"; 
+				}
 
 			private:
 
-				number_t m_start, m_end, m_step;
+				AstNode * m_start, * m_end, * m_step;
 
 		};
 

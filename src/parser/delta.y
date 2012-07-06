@@ -25,9 +25,9 @@ namespace delta {
 }
 
 }
-/*
+
 %debug
-*/
+
 %define api.pure
 %name-prefix "Parser_"
 %locations
@@ -41,7 +41,7 @@ namespace delta {
 
 %initial-action
 {
-	/* yydebug = 1; */
+	yydebug = 0;
 };
 
 %union
@@ -146,6 +146,8 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> expression
 %type <node> assign_expr
 %type <node> slot
+%type <node> sub_slot
+%type <node> const_slot
 %type <node> inner_value
 %type <node> value
 %type <node> operation
@@ -153,6 +155,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> par_fun_call
 %type <node> param_list
 %type <node> const_val
+%type <node> data_struct
 %type <node> var_def
 %type <node> fun_def
 %type <node> proto_def
@@ -161,8 +164,10 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> for_stmt
 %type <node> lambda_fun
 %type <node> array_def
+%type <node> array_values
 %type <node> range_def
 %type <node> map_def
+%type <node> map_values
 
 
 %%
@@ -197,11 +202,6 @@ expression:		/*const_val  TODO: this one doesn't belong here. For testing purpos
 ;
 
 
-nl:				/* empty */
-	|			'\n'
-;
-
-
 		/* Assignment expression. Like a = 3 or b += 1 */
 assign_expr:	slot nl '=' nl value
 										{
@@ -227,13 +227,22 @@ assign_expr:	slot nl '=' nl value
 
 
 		/* Slot of an object. Either variable or function. */
-slot:			NAME
-										{ $$ = new AstNodeSlot($1); }
-	|			NAME '.' slot
-										{ $$ = new AstNodeSlot($1, $3); }
-	|			const_val '.' slot
-										{ $$ = new AstNodeConstSlot($1, $3); }
+slot:			sub_slot
+										{ $$ = $1; }
+	|			const_slot
+										{ $$ = $1; }
 ;
+
+sub_slot:		NAME
+										{ $$ = new AstNodeSlot($1); }
+	|			NAME nl '.' sub_slot
+										{ $$ = new AstNodeSlot($1, $4); }
+;
+
+const_slot:		const_val nl '.' sub_slot
+										{ $$ = new AstNodeConstSlot($1, $4); }
+;
+
 
 		/* Operators */
 operation:		inner_value nl '+' nl value
@@ -261,6 +270,7 @@ inner_value:	slot					{ $$ = $1; }
 	|			par_fun_call	
 										{ $$ = $1; } 
 	|			operation				{ $$ = $1; }
+	|			data_struct				{ $$ = $1; }
 ;
 
 
@@ -334,17 +344,37 @@ const_val:		NUMBER  /* TODO: save the values */
 ;
 
 
+
+data_struct:	/*lambda_fun
+										{ $$ = $1; }
+	|		*/	range_def
+										{ $$ = $1; }
+	|			array_def
+										{ $$ = $1; }
+	|			map_def
+										{ $$ = $1; } 
+
+;
+
+
+
 var_def:		VAR NAME				{
 											$$ = new AstNodeSlotDecl($2);
 										}
-	|			VAR NAME '=' value		{
-											$$ = new AstNodeSlotDecl($2, $4);
+	|			VAR NAME nl '=' nl value		
+										{
+											$$ = new AstNodeSlotDecl($2, $6);
 										}
 ;
 
 
 fun_def:		/* TODO */
 	;
+
+
+lambda_fun:		/* TODO */
+	;
+
 
 proto_def:		/* TODO */
 	;
@@ -359,20 +389,91 @@ for_stmt:		/* TODO */
 	;
 
 
-lambda_fun:		/* TODO */
-	;
+
+
+array_def:		'[' nl array_values nl ']'
+										{ $$ = $3; } 
+;
+
+array_values:	/* empty */ 
+										{
+											AstNodeArray* a = new AstNodeArray();
+											$$ = a;
+										}
+	|			inner_value nl optional_comma
+										{
+											AstNodeArray* a = new AstNodeArray();
+											a->addValue($1);
+											$$ = a;
+										}
+	|			inner_value nl ',' nl array_values
+										{
+											AstNodeArray* a = dynamic_cast<AstNodeArray*>($5);
+											a->addValue($1);
+											$$ = a;
+										}
+;
 
 
 
-array_def:		/* TODO */
-	;
+			/* TODO: differentiate between ... and .. in the range */
 
-range_def:		/* TODO */
-	;
+range_def:		'[' inner_value '.' '.' inner_value ']'
+										{
+											AstNodeRange* r = new AstNodeRange($2, $5);
+											$$ = r;
+										}
+	|			'[' inner_value '.' '.' '.' inner_value ']'
+										{
+											AstNodeRange* r = new AstNodeRange($2, $6);
+											$$ = r;
+										}
+	|			'[' inner_value '.' '.' inner_value '.' '.' inner_value ']'
+										{
+											AstNodeRange* r = new AstNodeRange($2, $8, $5);
+											$$ = r;
+										}
+	|			'[' inner_value '.' '.' inner_value '.' '.' '.' inner_value ']'
+										{
+											AstNodeRange* r = new AstNodeRange($2, $9, $5);
+											$$ = r;
+										}
+;
 
-map_def:		/* TODO */
-	;
 
+
+map_def:		'{' nl map_values nl '}'
+										{ $$ = $3; } 
+;
+
+map_values:		/* empty */
+										{ 
+											AstNodeMap* m = new AstNodeMap();
+											$$ = m;
+										}
+	|			inner_value nl ':' nl value optional_comma
+										{ 
+											AstNodeMap* m = new AstNodeMap();
+											m->addValue($1, $5);
+											$$ = m;
+										}
+	|			inner_value nl ':' nl value nl ',' nl map_values
+										{ 
+											AstNodeMap* m = dynamic_cast<AstNodeMap*>($9);
+											m->addValue($1, $5);
+											$$ = m;
+										}
+;
+
+
+nl:				/* empty */
+	|			'\n' nl
+;
+
+
+optional_comma:		/* empty*/
+	|				','
+;
 
 
 %%

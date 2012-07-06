@@ -13,6 +13,7 @@ var b = sum (1, 2,3)
 
 //}
 
+//{
 c.d.e = pow hey.this.is.slot, a.value ((((e)))) + tan
 
 a.value ()
@@ -20,4 +21,17 @@ a.value ()
 c.d.e += pow (hey.this.is.slot, a.value (e) + tan(a.value))
 
 c.d.e /= pow hey.this.is.slot, (a.value e) + tan (a.value)
+
+//}
+
+//var b = [1..35]
+
+//var c = [1,2,3]
+
+var d = 
+{
+	:a : "hola", 
+	:b : b
+}
+
 

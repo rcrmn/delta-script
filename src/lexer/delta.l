@@ -210,14 +210,15 @@ END_STMT	[ \t\n\r;]
 											yylval->number = (number_t) atof(yytext); 
 											return NUMBER; 
 										}
-[0-9]*"."([0-9]+)("f"?)/{WB}		{ 
+[0-9]+"."([0-9]+)("f"?)/{WB}		{ 
 											yylval->number = (number_t) atof(yytext); 
 											return NUMBER; 
 										}
+										/*
 [0-9]+"."("f"?)/{WB}				{ 
 											yylval->number = (number_t) atof(yytext); 
 											return NUMBER; 
-										}
+										} */
 
 
 

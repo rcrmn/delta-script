@@ -40,6 +40,8 @@ namespace delta {
 				virtual AstNodeType getType() const = 0;
 
 				virtual void test() const {};
+
+				virtual ~AstNode() {};
 		};
 
 	} // namespace delta

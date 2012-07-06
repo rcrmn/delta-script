@@ -41,6 +41,8 @@ namespace delta {
 				inline AstNode* getSlot() { return m_slot; }
 
 
+				virtual void test() const { std::cout << " {"; m_const->test(); std::cout << "} "; if(m_slot != 0) {std::cout << " -> "; m_slot->test();} }
+
 			private:
 
 				AstNode* m_const;
