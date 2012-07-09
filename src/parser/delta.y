@@ -140,7 +140,11 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %left  '*' '/' AND
 
+%right '!'
+
 %left  '.'
+
+%nonassoc LTE GTE EQ NEQ '>' '<'
 
 
 %type <node> expression
@@ -153,6 +157,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> inner_value
 %type <node> value
 %type <node> operation
+%type <node> comparison
 
 
 %type <node> fun_call
@@ -214,7 +219,7 @@ expression:		/*const_val  TODO: this one doesn't belong here. For testing purpos
 	|			proto_def
 			*/
 	|			if_stmt
-										{ $$ = $1 }
+										{ $$ = $1; }
 			/*
 	|			for_stmt
 	|			while_stmt
@@ -281,6 +286,23 @@ operation:		inner_value nl '+' nl value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
 	|			inner_value nl XOR nl value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
+	|			'!' nl value
+										{ $$ = new AstNodeOperator($3, AstNodeOperator::Not, 0); }
+;
+
+
+comparison:		value nl EQ nl value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompEq, $5); }
+	|			value nl GTE nl value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompGte, $5); }
+	|			value nl LTE nl value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompLte, $5); }
+	|			value nl '<' nl value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompLt, $5); }
+	|			value nl '>' nl value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompGt, $5); }
+	|			value nl NEQ nl value
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompNeq, $5); }
 ;
 
 
@@ -300,6 +322,8 @@ inner_value:	slot					{ $$ = $1; }
 value:			inner_value		%dprec 1
 										{ $$ = $1; }
 	|			fun_call		%dprec 2			/* When finding a ')' suppose it belongs to a function call (where there is only one parameter) */	
+										{ $$ = $1; }
+	|			comparison
 										{ $$ = $1; }
 ;
 

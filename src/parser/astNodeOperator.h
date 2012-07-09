@@ -33,6 +33,13 @@ namespace delta {
 					Or,
 					Xor,
 					And,
+					Not,
+					CompEq,
+					CompNeq,
+					CompGte,
+					CompLte,
+					CompGt,
+					CompLt
 				};
 				
 				AstNodeOperator() {};
