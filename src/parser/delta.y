@@ -145,24 +145,43 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %type <node> expression
 %type <node> assign_expr
+
+
 %type <node> slot
 %type <node> sub_slot
 %type <node> const_slot
 %type <node> inner_value
 %type <node> value
 %type <node> operation
+
+
 %type <node> fun_call
 %type <node> par_fun_call
 %type <node> param_list
+
+
 %type <node> const_val
 %type <node> data_struct
+
 %type <node> var_def
+
 %type <node> fun_def
+%type <node> lambda_fun
+
 %type <node> proto_def
+
+
 %type <node> if_stmt
+%type <node> elif_blocks
+%type <node> else_block
+
 %type <node> while_stmt
 %type <node> for_stmt
-%type <node> lambda_fun
+
+%type <node> bool_expr
+%type <node> stmt_block
+
+
 %type <node> array_def
 %type <node> array_values
 %type <node> range_def
@@ -193,7 +212,10 @@ expression:		/*const_val  TODO: this one doesn't belong here. For testing purpos
 			/*
 	|			fun_def
 	|			proto_def
+			*/
 	|			if_stmt
+										{ $$ = $1 }
+			/*
 	|			for_stmt
 	|			while_stmt
 			*/
@@ -345,7 +367,7 @@ const_val:		NUMBER  /* TODO: save the values */
 
 
 
-data_struct:	/*lambda_fun
+data_struct:	/*lambda_fun   TODO
 										{ $$ = $1; }
 	|		*/	range_def
 										{ $$ = $1; }
@@ -379,8 +401,68 @@ lambda_fun:		/* TODO */
 proto_def:		/* TODO */
 	;
 
-if_stmt:		/* TODO */
-	;
+
+if_stmt:		IF nl bool_expr ':' nl stmt_block END
+										{ 
+											AstNodeIfBlock* b = new AstNodeIfBlock();
+											b->setBoolExpr($3);
+											b->setIfBlock($6);
+											b->setElifBlock(0);
+											b->setElseBlock(0);
+											$$ = b;
+										}
+	|			IF nl bool_expr ':' nl stmt_block elif_blocks END
+										{ 
+											AstNodeIfBlock* b = new AstNodeIfBlock();
+											b->setBoolExpr($3);
+											b->setIfBlock($6);
+											b->setElifBlock($7);
+											b->setElseBlock(0);
+											$$ = b;
+										}
+	|			IF nl bool_expr ':' nl stmt_block else_block END
+										{ 
+											AstNodeIfBlock* b = new AstNodeIfBlock();
+											b->setBoolExpr($3);
+											b->setIfBlock($6);
+											b->setElifBlock(0);
+											b->setElseBlock($7);
+											$$ = b;
+										}
+	|			IF nl bool_expr ':' nl stmt_block elif_blocks else_block END
+										{ 
+											AstNodeIfBlock* b = new AstNodeIfBlock();
+											b->setBoolExpr($3);
+											b->setIfBlock($6);
+											b->setElifBlock($7);
+											b->setElseBlock($8);
+											$$ = b;
+										}
+;
+
+elif_blocks:	ELIF nl bool_expr ':' nl stmt_block
+										{
+											AstNodeIfBlock* current = new AstNodeIfBlock();
+
+											current->setBoolExpr($3);
+											current->setIfBlock($6);
+											$$ = current;
+										}
+	|			ELIF nl bool_expr ':' nl stmt_block elif_blocks
+										{
+											AstNodeIfBlock* current = new AstNodeIfBlock();
+
+											current->setBoolExpr($3);
+											current->setIfBlock($6);
+											current->setElifBlock($7);
+											$$ = current;
+										}
+;
+
+else_block:		ELSE ':' nl stmt_block
+										{ $$ = $4; }
+;
+
 
 while_stmt:		/* TODO */
 	;
@@ -388,6 +470,20 @@ while_stmt:		/* TODO */
 for_stmt:		/* TODO */
 	;
 
+
+bool_expr:		value
+										{ $$ = $1; }
+;
+
+stmt_block:		/* empty */
+										{ $$ = new AstNodeBlock(); }
+	|			expression stmt_block
+										{ 
+											AstNodeBlock* b = dynamic_cast<AstNodeBlock*>($2); 
+											b->addExpression($1);
+											$$ = b;
+										}
+;
 
 
 
@@ -442,22 +538,25 @@ range_def:		'[' inner_value '.' '.' inner_value ']'
 
 
 
-map_def:		'{' nl map_values nl '}'
+map_def:		'{' nl map_values '}'						%dprec 2
 										{ $$ = $3; } 
+	|			'{' nl map_values '\n' nl '}'				%dprec 1
+										{ $$ = $3; } 
+
 ;
 
-map_values:		/* empty */
+map_values:		/* empty */											%dprec 3
 										{ 
 											AstNodeMap* m = new AstNodeMap();
 											$$ = m;
 										}
-	|			inner_value nl ':' nl value optional_comma
+	|			inner_value nl ':' nl value							%dprec 1
 										{ 
 											AstNodeMap* m = new AstNodeMap();
 											m->addValue($1, $5);
 											$$ = m;
 										}
-	|			inner_value nl ':' nl value nl ',' nl map_values
+	|			inner_value nl ':' nl value nl ',' nl map_values	%dprec 2
 										{ 
 											AstNodeMap* m = dynamic_cast<AstNodeMap*>($9);
 											m->addValue($1, $5);
@@ -466,13 +565,13 @@ map_values:		/* empty */
 ;
 
 
-nl:				/* empty */
-	|			'\n' nl
+nl:				/* empty */				%dprec 1
+	|			'\n' nl					%dprec 2
 ;
 
 
-optional_comma:		/* empty*/
-	|				','
+optional_comma:		/* empty */			%dprec 2
+	|				','					%dprec 1
 ;
 
 

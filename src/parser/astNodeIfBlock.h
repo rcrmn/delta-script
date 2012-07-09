@@ -20,24 +20,39 @@ namespace delta {
 		{
 			public:
 				
-				AstNodeIfBlock() : m_boolExp(0), m_elseBlock(0) {};
+				AstNodeIfBlock() : m_boolExp(0), m_elifBlock(0), m_elseBlock(0) {};
 
 				virtual AstNodeType getType() const { return IfBlock; };
 
 				inline void setBoolExpr(AstNode* boolExp) { m_boolExp = boolExp; }
 
 				inline AstNode* getBoolExpr() { return m_boolExp; }
-				
 
-				inline void setElseBlock(AstNodeBlock* elseBlock) { m_elseBlock = elseBlock; }
 
-				inline AstNodeBlock* getElseBlock() { return m_elseBlock; }
+				inline void setIfBlock(AstNode* ifB) { m_block = ifB; } 
+
+				inline AstNode* getIfBlock() { return m_block; }
+
+
+				inline void setElifBlock(AstNode* elif) { m_elifBlock = elif; } 
+
+				inline AstNode* getElifBlock() { return m_elifBlock; }
+
+
+				inline void setElseBlock(AstNode* elseB) { m_elseBlock = elseB; } 
+
+				inline AstNode* getElseBlock() { return m_elseBlock; }
+
 
 			private:
 
 				AstNode* m_boolExp;
 
-				AstNodeBlock* m_elseBlock;
+				AstNode* m_block;
+
+				AstNode* m_elifBlock;
+
+				AstNode* m_elseBlock;
 
 		};
 

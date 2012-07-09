@@ -71,7 +71,7 @@ WS			[ \t]
 	/* End Line */
 ENDL		(\n|\r|\r\n)
 	/* KeyWord Boundary */
-KWB			[ \t\(]
+KWB			[ \t\(:]
 
 END_STMT	[ \t\n\r;]
 
@@ -170,7 +170,7 @@ END_STMT	[ \t\n\r;]
 
 "if"/{KWB}								{ return IF; }
 "elif"/{KWB}							{ return ELIF; }
-"else"/{WS}								{ return ELSE; }
+"else"/{KWB}							{ return ELSE; }
 
 "while"/{KWB}							{ return WHILE; }
 
