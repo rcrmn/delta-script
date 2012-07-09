@@ -28,8 +28,22 @@ namespace delta {
 
 				inline size_t getExpressionsCount() { return m_expressions.size(); }
 
-				inline AstNode* getExpression(int i) { return m_expressions[i]; }
+				inline AstNode* getExpression(int i) const { return m_expressions[i]; }
 
+				virtual void test() const 
+				{ 
+					std::vector<AstNode*>::const_iterator it;
+
+					std::cout << "\t" << m_expressions.size() << " expressions." << std::endl;
+
+					for (it = m_expressions.begin(); it != m_expressions.end(); ++it)
+					{
+						std::cout << "------ Exp:" << std::endl;
+						std::cout << "\t" << (*it)->getType();
+						(*it)->test();
+						std::cout << std::endl;
+					}
+				}
 				
 			private:
 

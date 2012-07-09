@@ -158,6 +158,8 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> value
 %type <node> operation
 %type <node> comparison
+%type <node> direct_value
+%type <node> inner_val_or_comp
 
 
 %type <node> fun_call
@@ -272,36 +274,36 @@ const_slot:		const_val nl '.' sub_slot
 
 
 		/* Operators */
-operation:		inner_value nl '+' nl value
+operation:		inner_value nl '+' nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $5); }
-	|			inner_value nl '-' nl value
+	|			inner_value nl '-' nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $5); }
-	|			inner_value nl '*' nl value
+	|			inner_value nl '*' nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $5); }
-	|			inner_value nl '/' nl value
+	|			inner_value nl '/' nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $5); }
-	|			inner_value nl OR  nl value
+	|			inner_val_or_comp nl OR  nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
-	|			inner_value nl AND nl value
+	|			inner_val_or_comp nl AND nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
-	|			inner_value nl XOR nl value
+	|			inner_val_or_comp nl XOR nl direct_value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
-	|			'!' nl value
+	|			'!' nl direct_value
 										{ $$ = new AstNodeOperator($3, AstNodeOperator::Not, 0); }
 ;
 
 
-comparison:		value nl EQ nl value
+comparison:		direct_value nl EQ nl direct_value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompEq, $5); }
-	|			value nl GTE nl value
+	|			direct_value nl GTE nl direct_value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompGte, $5); }
-	|			value nl LTE nl value
+	|			direct_value nl LTE nl direct_value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompLte, $5); }
-	|			value nl '<' nl value
+	|			direct_value nl '<' nl direct_value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompLt, $5); }
-	|			value nl '>' nl value
+	|			direct_value nl '>' nl direct_value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompGt, $5); }
-	|			value nl NEQ nl value
+	|			direct_value nl NEQ nl direct_value
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::CompNeq, $5); }
 ;
 
@@ -319,14 +321,24 @@ inner_value:	slot					{ $$ = $1; }
 
 
 		/* An expression that has a value */
-value:			inner_value		%dprec 1
+direct_value:	inner_value		%dprec 1
 										{ $$ = $1; }
 	|			fun_call		%dprec 2			/* When finding a ')' suppose it belongs to a function call (where there is only one parameter) */	
 										{ $$ = $1; }
-	|			comparison
-										{ $$ = $1; }
+
 ;
 
+value:			direct_value
+										{ $$ = $1; }
+	|			comparison
+										{ $$ = $1; } 
+;
+
+inner_val_or_comp:	inner_value
+										{ $$ = $1; }
+	|				comparison
+										{ $$ = $1; }
+;
 
 
 fun_call:		slot

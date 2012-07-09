@@ -44,6 +44,29 @@ namespace delta {
 				inline AstNode* getElseBlock() { return m_elseBlock; }
 
 
+				virtual void test() const
+				{
+					std::cout << " IF ( ";
+					m_boolExp->test();
+					std::cout << " ) { " << std::endl;
+					m_block->test();
+
+					std::cout << std::endl << " } ";
+					if(m_elifBlock != 0)
+					{
+						std::cout << " ELIF { " << std::endl;
+						m_elifBlock->test();
+						std::cout << " } " << std::endl;
+					}
+
+					if(m_elseBlock != 0)
+					{
+						std::cout << " ELSE { " << std::endl;
+						m_elseBlock->test();
+						std::cout << " } " << std::endl;
+					}
+				}
+
 			private:
 
 				AstNode* m_boolExp;
