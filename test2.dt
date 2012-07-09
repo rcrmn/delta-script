@@ -39,6 +39,8 @@ var d =
 
 if true:
 	var x = 1
+elif y == 3:
+	var x = 2
 else:
 	var x = 0
 end
