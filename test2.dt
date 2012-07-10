@@ -62,8 +62,13 @@ else:
 end
 //}
 
+//{
 for it in [0..10]:
 	print it
 end
+//}
 
+fun test:
+	print 1
+end
 

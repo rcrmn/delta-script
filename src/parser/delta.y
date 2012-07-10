@@ -178,6 +178,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %type <node> fun_def
 %type <node> lambda_fun
+%type <node> fun_def_plist
 
 %type <node> proto_def
 
@@ -235,8 +236,9 @@ block_expression:
 										{ $$ = $1; }
 	|			while_stmt				
 										{ $$ = $1; }
-			/*
 	|			fun_def
+										{ $$ = $1; }
+			/*
 	|			proto_def
 			*/
 ;
@@ -453,9 +455,35 @@ var_def:		VAR NAME				{
 ;
 
 
-fun_def:		/* TODO */
-	;
+fun_def:		FUN NAME nl '(' nl fun_def_plist nl ')' ':' nl stmt_block END
+										{ 
+											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>($6);
+											f->setName($2);
+											f->setCodeBlock($11);
+											$$ = f;
+										}
+	|			FUN NAME nl fun_def_plist ':' nl stmt_block END
+										{ 
+											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>($4);
+											f->setName($2);
+											f->setCodeBlock($7);
+											$$ = f;
+										}
 
+;
+
+fun_def_plist:	/* empty */
+										{ 
+											AstNodeFunctionBlock* f = new AstNodeFunctionBlock();
+											$$ = f;
+										}
+	|			NAME nl ',' nl fun_def_plist
+										{ 
+											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>($5);
+											f->addParam($1);
+											$$ = f;
+										}
+;
 
 lambda_fun:		/* TODO */
 	;
