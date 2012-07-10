@@ -150,7 +150,8 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 
 %type <node> expression
-%type <node> single_expression
+%type <node> delimited_expression
+%type <node> block_expression
 %type <node> assign_expr
 
 
@@ -207,15 +208,38 @@ white_start:	'\n' white_start
 	|			start
 ;
 
-start:			single_expression 
+start:			delimited_expression 
 										{ context->ast->addExpression($1); }
 					start
 	|			/* empty */
 ;
 
-single_expression: 
-				expression ';'			{ $$ = $1; }
-	|			expression '\n'			{ $$ = $1; }
+delimited_expression: 
+				expression ';'	
+										{ $$ = $1; }
+	|			expression '\n'
+										{ $$ = $1; }
+	|			delimited_expression ';'	
+										{ $$ = $1; }
+	|			delimited_expression '\n'
+										{ $$ = $1; }
+	|			block_expression
+										{ $$ = $1; }
+;
+
+
+block_expression:
+				if_stmt
+										{ $$ = $1; }
+	|			for_stmt
+										{ $$ = $1; }
+	|			while_stmt				
+										{ $$ = $1; }
+			/*
+	|			fun_def
+	|			proto_def
+			*/
+;
 
 
 expression:		/*const_val  TODO: this one doesn't belong here. For testing purposes only. 
@@ -225,18 +249,6 @@ expression:		/*const_val  TODO: this one doesn't belong here. For testing purpos
 										{ $$ = $1; }
 	|			fun_call
 										{ $$ = $1; }
-			/*
-	|			fun_def
-	|			proto_def
-			*/
-	|			if_stmt
-										{ $$ = $1; }
-	|			for_stmt
-										{ $$ = $1; }
-	|			while_stmt				{ $$ = $1; }
-
-	|			expression ';'			{ $$ = $1; }
-	|			expression '\n'			{ $$ = $1; }
 ;
 
 
@@ -557,7 +569,7 @@ bool_expr:		value
 
 stmt_block:		/* empty */
 										{ $$ = new AstNodeBlock(); }
-	|			single_expression stmt_block
+	|			delimited_expression stmt_block
 										{ 
 											AstNodeBlock* b = dynamic_cast<AstNodeBlock*>($2); 
 											b->addExpression($1);
