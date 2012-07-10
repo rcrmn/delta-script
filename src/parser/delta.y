@@ -41,7 +41,7 @@ namespace delta {
 
 %initial-action
 {
-	yydebug = 1;
+	yydebug = 0;
 };
 
 %union
@@ -150,6 +150,7 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 
 %type <node> expression
+%type <node> single_expression
 %type <node> assign_expr
 
 
@@ -206,11 +207,15 @@ white_start:	'\n' white_start
 	|			start
 ;
 
-start:			expression 
+start:			single_expression 
 										{ context->ast->addExpression($1); }
 					start
 	|			/* empty */
 ;
+
+single_expression: 
+				expression ';'			{ $$ = $1; }
+	|			expression '\n'			{ $$ = $1; }
 
 
 expression:		/*const_val  TODO: this one doesn't belong here. For testing purposes only. 
@@ -336,6 +341,8 @@ direct_value:	inner_value		%dprec 1
 
 ;
 
+
+
 value:			direct_value
 										{ $$ = $1; }
 	|			comparison
@@ -349,18 +356,18 @@ inner_val_or_comp:	inner_value
 ;
 
 
-fun_call:		slot				%dprec 3
+fun_call:		slot				%dprec 1
 										{
 											AstNodeFunCall* f = new AstNodeFunCall($1);
 											$$ = f;
 										}
-	|			slot param_list		%dprec 2	
+	|			slot param_list		%dprec 3	
 										{ 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($2);
 											f->setSlot($1);
 											$$ = f;
 										} 
-	|			par_fun_call		%dprec 1	
+	|			par_fun_call		%dprec 2	
 										{ $$ = $1; }
 ;
 
@@ -372,9 +379,9 @@ par_fun_call:	slot '(' ')'
 											$$ = f;
 										}
 	
-	|			slot '(' param_list ')'		
+	|			slot '(' nl param_list ')'		
 										{
-											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($3);
+											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($4);
 											f->setSlot($1);
 											$$ = f;
 										} 
@@ -550,7 +557,7 @@ bool_expr:		value
 
 stmt_block:		/* empty */
 										{ $$ = new AstNodeBlock(); }
-	|			expression stmt_block
+	|			single_expression stmt_block
 										{ 
 											AstNodeBlock* b = dynamic_cast<AstNodeBlock*>($2); 
 											b->addExpression($1);
