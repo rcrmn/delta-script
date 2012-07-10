@@ -41,7 +41,7 @@ namespace delta {
 
 %initial-action
 {
-	yydebug = 0;
+	yydebug = 1;
 };
 
 %union
@@ -140,11 +140,13 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %left  '*' '/' AND
 
-%right '!'
+%right '!' UMINUS
+
+%nonassoc LTE GTE EQ NEQ '>' '<'
 
 %left  '.'
 
-%nonassoc LTE GTE EQ NEQ '>' '<'
+
 
 
 %type <node> expression
@@ -185,6 +187,8 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> while_stmt
 %type <node> for_stmt
 
+%type <node> for_in_vars
+
 %type <node> bool_expr
 %type <node> stmt_block
 
@@ -222,10 +226,10 @@ expression:		/*const_val  TODO: this one doesn't belong here. For testing purpos
 			*/
 	|			if_stmt
 										{ $$ = $1; }
-			/*
 	|			for_stmt
-	|			while_stmt
-			*/
+										{ $$ = $1; }
+	|			while_stmt				{ $$ = $1; }
+
 	|			expression ';'			{ $$ = $1; }
 	|			expression '\n'			{ $$ = $1; }
 ;
@@ -317,6 +321,8 @@ inner_value:	slot					{ $$ = $1; }
 										{ $$ = $1; } 
 	|			operation				{ $$ = $1; }
 	|			data_struct				{ $$ = $1; }
+	|			'-' inner_value   %prec UMINUS
+										{ $$ = new AstNodeOperator($2, AstNodeOperator::Negative, 0); }
 ;
 
 
@@ -325,6 +331,8 @@ direct_value:	inner_value		%dprec 1
 										{ $$ = $1; }
 	|			fun_call		%dprec 2			/* When finding a ')' suppose it belongs to a function call (where there is only one parameter) */	
 										{ $$ = $1; }
+	|			'-' direct_value		  %prec UMINUS %dprec 3
+										{ $$ = new AstNodeOperator($2, AstNodeOperator::Negative, 0); }
 
 ;
 
@@ -341,7 +349,7 @@ inner_val_or_comp:	inner_value
 ;
 
 
-fun_call:		slot
+fun_call:		slot				%dprec 3
 										{
 											AstNodeFunCall* f = new AstNodeFunCall($1);
 											$$ = f;
@@ -500,11 +508,40 @@ else_block:		ELSE ':' nl stmt_block
 ;
 
 
-while_stmt:		/* TODO */
-	;
 
-for_stmt:		/* TODO */
-	;
+while_stmt:		WHILE nl bool_expr ':' nl stmt_block END
+										{ 
+											AstNodeWhileBlock* block = new AstNodeWhileBlock();
+											block->setBoolExpr($3);
+											block->setBlock($6);
+											$$ = block;
+										}
+;
+
+
+
+for_stmt:		FOR nl for_in_vars nl IN nl value ':' nl stmt_block END
+										{ 
+											AstNodeForBlock* b = dynamic_cast<AstNodeForBlock*>($3);
+											b->setIterator($7);
+											b->setBlock($10);
+											$$ = b;
+										}
+;
+
+for_in_vars:	slot
+										{ 
+											AstNodeForBlock* b = new AstNodeForBlock();
+											b->addInVar($1);
+											$$ = b;
+										}
+	|			slot nl ',' nl for_in_vars
+										{
+											AstNodeForBlock* b = dynamic_cast<AstNodeForBlock*>($5);
+											b->addInVar($1);
+											$$ = b;
+										}
+;
 
 
 bool_expr:		value

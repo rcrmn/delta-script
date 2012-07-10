@@ -2253,7 +2253,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
 
     {
        11, -110, -110, -110, -110, -110, -110, -110, -110,  146,
-       73, -110, -110,   73, -110, -110, -110, -110, -110, -110,
+      146, -110, -110,  146, -110, -110, -110, -110, -110, -110,
      -110, -110, -110, -110, -110, -110, -110, -110, -110, -110,
      -110, -110,  146,   74,   73, -110,   75,   73,   73,   73,
       146,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -2270,7 +2270,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
 
     {
        11, -111, -111, -111, -111, -111, -111, -111, -111,  147,
-       73, -111, -111,   73, -111, -111, -111, -111, -111, -111,
+      147, -111, -111,  147, -111, -111, -111, -111, -111, -111,
      -111, -111, -111, -111, -111, -111, -111, -111, -111, -111,
      -111, -111,  147,   74,   73, -111,   75,   73,   73,   73,
       147,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -2841,7 +2841,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
 
     {
        11, -144, -144, -144, -144, -144, -144, -144, -144,  167,
-       73, -144, -144,   73, -144, -144, -144, -144, -144, -144,
+      167, -144, -144,  167, -144, -144, -144, -144, -144, -144,
      -144, -144, -144, -144, -144, -144, -144, -144, -144, -144,
      -144, -144,  167,   74,   73, -144,   75,   73,   73,   73,
       167,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -2858,7 +2858,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
 
     {
        11, -145, -145, -145, -145, -145, -145, -145, -145,  168,
-       73, -145, -145,   73, -145, -145, -145, -145, -145, -145,
+      168, -145, -145,  168, -145, -145, -145, -145, -145, -145,
      -145, -145, -145, -145, -145, -145, -145, -145, -145, -145,
      -145, -145,  168,   74,   73, -145,   75,   73,   73,   73,
       168,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -3170,7 +3170,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
     {
        11, -163, -163, -163, -163, -163, -163, -163, -163,  180,
 
-       73, -163, -163,   73, -163, -163, -163, -163, -163, -163,
+      180, -163, -163,  180, -163, -163, -163, -163, -163, -163,
      -163, -163, -163, -163, -163, -163, -163, -163, -163, -163,
      -163, -163,  180,   74,   73, -163,   75,   73,   73,   73,
       180,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -3187,7 +3187,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
 
     {
        11, -164, -164, -164, -164, -164, -164, -164, -164,  181,
-       73, -164, -164,   73, -164, -164, -164, -164, -164, -164,
+      181, -164, -164,  181, -164, -164, -164, -164, -164, -164,
      -164, -164, -164, -164, -164, -164, -164, -164, -164, -164,
      -164, -164,  181,   74,   73, -164,   75,   73,   73,   73,
       181,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -3516,7 +3516,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
     {
        11, -183, -183, -183, -183, -183, -183, -183, -183,  190,
 
-       73, -183, -183,   73, -183, -183, -183, -183, -183, -183,
+      190, -183, -183,  190, -183, -183, -183, -183, -183, -183,
      -183, -183, -183, -183, -183, -183, -183, -183, -183, -183,
      -183, -183,  190,   74,   73, -183,   75,   73,   73,   73,
       190,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -3567,7 +3567,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
 
     {
        11, -186, -186, -186, -186, -186, -186, -186, -186,  192,
-       73, -186, -186,   73, -186, -186, -186, -186, -186, -186,
+      192, -186, -186,  192, -186, -186, -186, -186, -186, -186,
 
      -186, -186, -186, -186, -186, -186, -186, -186, -186, -186,
      -186, -186,  192,   74,   73, -186,   75,   73,   73,   73,
@@ -3654,7 +3654,7 @@ static yyconst flex_int16_t yy_nxt[][128] =
 
     {
        11, -191, -191, -191, -191, -191, -191, -191, -191,  194,
-       73, -191, -191,   73, -191, -191, -191, -191, -191, -191,
+      194, -191, -191,  194, -191, -191, -191, -191, -191, -191,
      -191, -191, -191, -191, -191, -191, -191, -191, -191, -191,
      -191, -191,  194,   74,   73, -191,   75,   73,   73,   73,
       194,   73,   73,   73,   73,   73,   73,   73,   75,   75,
@@ -3812,8 +3812,8 @@ static yyconst flex_int16_t yy_accept[197] =
 static yyconst flex_int32_t yy_rule_can_match_eol[86] =
     {   0,
 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 
     0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 
     0, 0, 1, 0, 0, 0,     };
 
@@ -4394,6 +4394,7 @@ YY_RULE_SETUP
 	  * ===================================
 	  * =================================== */
 case 38:
+/* rule 38 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4410,6 +4411,7 @@ YY_RULE_SETUP
 { return VAR; }
 	YY_BREAK
 case 40:
+/* rule 40 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 5;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4418,6 +4420,7 @@ YY_RULE_SETUP
 { return PROTOTYPE; }
 	YY_BREAK
 case 41:
+/* rule 41 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4426,6 +4429,7 @@ YY_RULE_SETUP
 { return IF; }
 	YY_BREAK
 case 42:
+/* rule 42 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4434,6 +4438,7 @@ YY_RULE_SETUP
 { return ELIF; }
 	YY_BREAK
 case 43:
+/* rule 43 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4442,6 +4447,7 @@ YY_RULE_SETUP
 { return ELSE; }
 	YY_BREAK
 case 44:
+/* rule 44 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 5;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4450,6 +4456,7 @@ YY_RULE_SETUP
 { return WHILE; }
 	YY_BREAK
 case 45:
+/* rule 45 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4458,6 +4465,7 @@ YY_RULE_SETUP
 { return FOR; }
 	YY_BREAK
 case 46:
+/* rule 46 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4493,6 +4501,7 @@ YY_RULE_SETUP
 { return END; }
 	YY_BREAK
 case 50:
+/* rule 50 can match eol */
 *yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
 yyg->yy_c_buf_p = yy_cp = yy_bp + 6;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
@@ -4880,7 +4889,7 @@ YY_RULE_SETUP
 #line 454 "lexer/delta.l"
 ECHO;
 	YY_BREAK
-#line 4884 "lex.yy.cpp"
+#line 4893 "lex.yy.cpp"
 
 	case YY_END_OF_BUFFER:
 		{

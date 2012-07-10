@@ -71,7 +71,7 @@ WS			[ \t]
 	/* End Line */
 ENDL		(\n|\r|\r\n)
 	/* KeyWord Boundary */
-KWB			[ \t\(:]
+KWB			[ \t\n\r\(:]
 
 END_STMT	[ \t\n\r;]
 

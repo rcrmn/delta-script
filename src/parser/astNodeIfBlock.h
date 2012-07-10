@@ -20,7 +20,7 @@ namespace delta {
 		{
 			public:
 				
-				AstNodeIfBlock() : m_boolExp(0), m_elifBlock(0), m_elseBlock(0) {};
+				AstNodeIfBlock() : m_boolExp(0), m_block(0), m_elifBlock(0), m_elseBlock(0) {};
 
 				virtual AstNodeType getType() const { return IfBlock; };
 

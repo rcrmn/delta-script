@@ -92,7 +92,8 @@ namespace delta {
      AND = 287,
      OR = 288,
      XOR = 289,
-     LEXER_ERR = 290
+     LEXER_ERR = 290,
+     UMINUS = 291
    };
 #endif
 
@@ -115,7 +116,7 @@ typedef union YYSTYPE
 
 
 /* Line 2663 of glr.c  */
-#line 119 "parser.yy.hpp"
+#line 120 "parser.yy.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 #endif

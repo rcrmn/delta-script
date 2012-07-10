@@ -37,12 +37,36 @@ var d =
 }
 //}
 
-if true:
+//{
+if y > 3:
 	var x = 1
+
+	if z < 1:
+		z = -1
+	elif z == 1:
+		z = 0
+	elif z == 2:
+		z = 2
+	else:
+		z = 10
+	end
 elif y == 3:
 	var x = 2
+
+	while x < 10:
+		x += 1
+	end
+
 else:
 	var x = 0
 end
+//}
 
+//{
+for it in [0..10]:
+	print it
+end
+//}
+
+print it
 

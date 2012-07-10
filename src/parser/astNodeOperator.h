@@ -39,7 +39,8 @@ namespace delta {
 					CompGte,
 					CompLte,
 					CompGt,
-					CompLt
+					CompLt,
+					Negative
 				};
 				
 				AstNodeOperator() {};
@@ -63,7 +64,19 @@ namespace delta {
 
 
 
-				virtual void test() const { m_left->test(); std::cout << " oper<" << m_operator << "> "; m_right->test(); }
+				virtual void test() const { 
+					if(m_operator != Not && m_operator != Negative)
+					{
+						m_left->test(); 
+						std::cout << " oper<" << m_operator << "> "; 
+						m_right->test(); 
+					}
+					else
+					{
+						std::cout << " oper<" << m_operator << "> "; 
+						m_left->test(); 
+					}
+				}
 
 			private:
 
