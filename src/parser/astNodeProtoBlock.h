@@ -25,14 +25,20 @@ namespace delta {
 				virtual AstNodeType getType() const { return ProtoBlock; };
 
 
-				inline void setSlot(AstNodeSlot* name) { m_name = name; }
+				inline void setSlot(AstNode* name) { m_name = name; }
 				
-				inline AstNodeSlot* getSlot() { return m_name; }
+				inline AstNode* getSlot() { return m_name; }
+
+
+				inline void setBlock(AstNode* block) { m_block = block; }
+
+				inline AstNode* getBlock() const { return m_block; }
 
 			private:
 
-				AstNodeSlot* m_name;
+				AstNode* m_name;
 
+				AstNode* m_block;
 		};
 
 	} // namespace delta

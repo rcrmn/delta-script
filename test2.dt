@@ -68,9 +68,17 @@ for it in [0..10]:
 end
 //}
 
+//{
 fun test:
 	print 1
 end
+//}
 
-f = fun (x): print x end
+a = a && b || c
+
+//a = a || b || c && d && e ^^ f || x
+
+//a = a * b + c * d
+
+//f = fun (x): print x end
 

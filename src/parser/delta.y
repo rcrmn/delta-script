@@ -26,23 +26,26 @@ namespace delta {
 
 }
 
-%debug
-
-%define api.pure
 %name-prefix "Parser_"
-%locations
-%defines            /* Generates header file */
-%error-verbose
-
-%glr-parser
-
+%define api.pure
 %parse-param { Parser_Context* context }
 %lex-param { void* scanner }
 
+
+%defines            /* Generates header file */
+%locations
+
+
+%glr-parser
+
+
+%error-verbose
+%debug
 %initial-action
 {
-	yydebug = 0;
+	yydebug = 1;
 };
+
 
 %union
 {
@@ -133,16 +136,19 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %token LEXER_ERR
 
 
+
 /* Operator Precedence and associativity */
+%nonassoc LTE GTE EQ NEQ '>' '<'
+
 %right '='
 
-%left  '+' '-' OR XOR
+%left  '+' '-' OR
+
+%left  XOR
 
 %left  '*' '/' AND
 
 %right '!' UMINUS
-
-%nonassoc LTE GTE EQ NEQ '>' '<'
 
 %left  '.'
 
@@ -165,6 +171,10 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> direct_value
 %type <node> inner_val_or_comp
 
+%type <node> bool_oper
+%type <node> or_oper
+%type <node> xor_oper
+%type <node> and_oper
 
 %type <node> fun_call
 %type <node> par_fun_call
@@ -311,22 +321,14 @@ const_slot:		const_val nl '.' sub_slot
 
 
 		/* Operators */
-operation:		inner_value nl '+' nl direct_value
+operation:		direct_value nl '+' nl direct_value   %dprec 2
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $5); }
-	|			inner_value nl '-' nl direct_value
+	|			direct_value nl '-' nl direct_value   %dprec 2
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $5); }
-	|			inner_value nl '*' nl direct_value
+	|			direct_value nl '*' nl direct_value   %dprec 1
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $5); }
-	|			inner_value nl '/' nl direct_value
+	|			direct_value nl '/' nl direct_value   %dprec 1
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $5); }
-	|			inner_val_or_comp nl OR  nl direct_value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
-	|			inner_val_or_comp nl AND nl direct_value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
-	|			inner_val_or_comp nl XOR nl direct_value
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
-	|			'!' nl direct_value
-										{ $$ = new AstNodeOperator($3, AstNodeOperator::Not, 0); }
 ;
 
 
@@ -346,13 +348,15 @@ comparison:		direct_value nl EQ nl direct_value
 
 
 		/* Something that can be a parameter of a function call */
-inner_value:	slot					{ $$ = $1; } 
+inner_value:	slot					{
+											AstNodeFunCall* f = new AstNodeFunCall($1);
+											$$ = f;
+										}
 	|			'(' value ')'	
 										{ $$ = $2; } 
 	|			const_val				{ $$ = $1; } 
 	|			par_fun_call	
 										{ $$ = $1; } 
-	|			operation				{ $$ = $1; }
 	|			data_struct				{ $$ = $1; }
 	|			'-' inner_value   %prec UMINUS
 										{ $$ = new AstNodeOperator($2, AstNodeOperator::Negative, 0); }
@@ -366,36 +370,78 @@ direct_value:	inner_value		%dprec 1
 										{ $$ = $1; }
 	|			'-' direct_value		  %prec UMINUS %dprec 3
 										{ $$ = new AstNodeOperator($2, AstNodeOperator::Negative, 0); }
-
-;
-
-
-
-value:			direct_value
+	|			operation				
 										{ $$ = $1; }
-	|			comparison
-										{ $$ = $1; } 
+
 ;
 
-inner_val_or_comp:	inner_value
+
+
+value:			direct_value        %dprec 1
+										{ $$ = $1; }
+	|			inner_val_or_comp   %dprec 2
+										{ $$ = $1; } 
+	|			bool_oper			%dprec 3
+										{ $$ = $1; }
+;
+
+
+inner_val_or_comp:	direct_value             %dprec 1
 										{ $$ = $1; }
 	|				comparison
 										{ $$ = $1; }
 ;
 
 
-fun_call:		slot				%dprec 1
-										{
-											AstNodeFunCall* f = new AstNodeFunCall($1);
-											$$ = f;
-										}
-	|			slot param_list		%dprec 3	
+
+bool_oper:		or_oper      %dprec 4
+										{ $$ = $1; }
+	|			xor_oper     %dprec 3
+										{ $$ = $1; }
+	|			and_oper     %dprec 2
+										{ $$ = $1; }
+	|			'!' nl direct_value %dprec 1
+										{ $$ = new AstNodeOperator($3, AstNodeOperator::Not, 0); }
+	|			'(' bool_oper ')'   %dprec 1
+										{ $$ = $2; }
+	|			inner_val_or_comp   %dprec 5
+										{ $$ = $1; }
+;
+
+
+or_oper:			or_oper nl OR nl inner_val_or_comp              %dprec 2
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
+	|				bool_oper nl OR nl inner_val_or_comp            %dprec 1
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
+	|				inner_val_or_comp								%dprec 3
+						     	       	{ $$ = $1; }
+;
+	   
+xor_oper:			xor_oper nl XOR nl inner_val_or_comp            %dprec 2
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
+	|				bool_oper nl XOR nl inner_val_or_comp           %dprec 1
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
+	|				inner_val_or_comp								%dprec 3
+						     	       	{ $$ = $1; }
+;
+
+and_oper:			or_oper nl AND nl inner_val_or_comp             %dprec 2
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
+	|				or_oper nl AND nl inner_val_or_comp             %dprec 1
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
+	|				inner_val_or_comp								%dprec 3
+						     	       	{ $$ = $1; }
+;
+
+
+
+fun_call:		slot param_list		%dprec 2	
 										{ 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>($2);
 											f->setSlot($1);
 											$$ = f;
 										} 
-	|			par_fun_call		%dprec 2	
+	|			par_fun_call		%dprec 1	
 										{ $$ = $1; }
 ;
 
