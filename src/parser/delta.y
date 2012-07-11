@@ -432,9 +432,9 @@ const_val:		NUMBER  /* TODO: save the values */
 
 
 
-data_struct:	/*lambda_fun   TODO
+data_struct:	lambda_fun
 										{ $$ = $1; }
-	|		*/	range_def
+	|			range_def
 										{ $$ = $1; }
 	|			array_def
 										{ $$ = $1; }
@@ -469,8 +469,23 @@ fun_def:		FUN NAME nl '(' nl fun_def_plist nl ')' ':' nl stmt_block END
 											f->setCodeBlock($7);
 											$$ = f;
 										}
-
 ;
+
+
+lambda_fun:		FUN '(' nl fun_def_plist nl ')' ':' nl stmt_block END
+										{ 
+											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>($4);
+											f->setCodeBlock($9);
+											$$ = f;
+										}
+	|			FUN fun_def_plist ':' nl stmt_block END
+										{ 
+											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>($2);
+											f->setCodeBlock($5);
+											$$ = f;
+										}
+;
+
 
 fun_def_plist:	/* empty */
 										{ 
@@ -484,9 +499,6 @@ fun_def_plist:	/* empty */
 											$$ = f;
 										}
 ;
-
-lambda_fun:		/* TODO */
-	;
 
 
 proto_def:		/* TODO */
