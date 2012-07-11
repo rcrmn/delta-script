@@ -72,3 +72,5 @@ fun test:
 	print 1
 end
 
+f = fun (x): print x end
+

@@ -205,6 +205,20 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %%
 
+	/*****************************************
+	*****************  TODO ******************
+	******************************************
+	**
+	*  continue
+	*  break
+	*  return
+	*  ...
+	*
+	*  One line function definitions like = fun ( x ) : print x end
+	*  +-> One line programs. Avoid having to have new line at last line.
+	******************************************/
+
+
 white_start:	'\n' white_start
 	|			start
 ;
@@ -420,7 +434,7 @@ param_list:		inner_value nl ',' nl param_list
 
 
 
-const_val:		NUMBER  /* TODO: save the values */
+const_val:		NUMBER 
 										{ $$ = new AstNodeNumber($1); }
 	|			STRING                                                
 										{ $$ = new AstNodeString($1); }
@@ -490,6 +504,12 @@ lambda_fun:		FUN '(' nl fun_def_plist nl ')' ':' nl stmt_block END
 fun_def_plist:	/* empty */
 										{ 
 											AstNodeFunctionBlock* f = new AstNodeFunctionBlock();
+											$$ = f;
+										}
+	|			NAME
+										{ 
+											AstNodeFunctionBlock* f = new AstNodeFunctionBlock();
+											f->addParam($1);
 											$$ = f;
 										}
 	|			NAME nl ',' nl fun_def_plist
