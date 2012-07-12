@@ -161,6 +161,8 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> inner_value
 %type <node> value
 %type <node> operation
+%type <node> bool_operation
+
 %type <node> comparison
 %type <node> direct_value
 %type <node> inner_val_or_comp
@@ -319,14 +321,35 @@ operation:		inner_value nl '+' nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $5); }
 	|			inner_value nl '/' nl direct_value
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $5); }
-	|			inner_val_or_comp nl OR  nl direct_value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
-	|			inner_val_or_comp nl AND nl direct_value
+;
+
+		/* TODO: FIX ME!! Right now it can only parse simple operations. */
+bool_operation:
+				inner_val_or_comp nl AND nl inner_val_or_comp   %dprec 1
 						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
-	|			inner_val_or_comp nl XOR nl direct_value
+	|			bool_operation nl AND nl inner_val_or_comp   %dprec 2
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
+	|			bool_operation nl AND nl bool_operation   %dprec 3
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
+
+	|			inner_val_or_comp nl XOR nl inner_val_or_comp   %dprec 4
 										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
+	|			bool_operation nl XOR nl inner_val_or_comp   %dprec 5
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
+	|			bool_operation nl XOR nl bool_operation   %dprec 6
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
+
+	|			inner_val_or_comp nl OR nl inner_val_or_comp   %dprec 7
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
+	|			bool_operation nl OR nl inner_val_or_comp   %dprec 8
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
+	|			bool_operation nl OR nl bool_operation		%dprec 9
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
+
 	|			'!' nl direct_value
 										{ $$ = new AstNodeOperator($3, AstNodeOperator::Not, 0); }
+	|			inner_val_or_comp	%dprec 10
+										{ $$ = $1; }
 ;
 
 
@@ -352,7 +375,6 @@ inner_value:	slot					{ $$ = $1; }
 	|			const_val				{ $$ = $1; } 
 	|			par_fun_call	
 										{ $$ = $1; } 
-	|			operation				{ $$ = $1; }
 	|			data_struct				{ $$ = $1; }
 	|			'-' inner_value   %prec UMINUS
 										{ $$ = new AstNodeOperator($2, AstNodeOperator::Negative, 0); }
@@ -366,7 +388,8 @@ direct_value:	inner_value		%dprec 1
 										{ $$ = $1; }
 	|			'-' direct_value		  %prec UMINUS %dprec 3
 										{ $$ = new AstNodeOperator($2, AstNodeOperator::Negative, 0); }
-
+	|			operation				
+										{ $$ = $1; }
 ;
 
 
@@ -375,9 +398,11 @@ value:			direct_value
 										{ $$ = $1; }
 	|			comparison
 										{ $$ = $1; } 
+	|			bool_operation				
+										{ $$ = $1; }
 ;
 
-inner_val_or_comp:	inner_value
+inner_val_or_comp:	direct_value
 										{ $$ = $1; }
 	|				comparison
 										{ $$ = $1; }

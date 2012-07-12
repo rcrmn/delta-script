@@ -67,14 +67,18 @@ namespace delta {
 				virtual void test() const { 
 					if(m_operator != Not && m_operator != Negative)
 					{
+						std::cout << " [ ";
 						m_left->test(); 
 						std::cout << " oper<" << m_operator << "> "; 
 						m_right->test(); 
+						std::cout << " ] ";
 					}
 					else
 					{
+						std::cout << " [ ";
 						std::cout << " oper<" << m_operator << "> "; 
 						m_left->test(); 
+						std::cout << " ] ";
 					}
 				}
 
