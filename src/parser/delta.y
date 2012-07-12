@@ -26,19 +26,20 @@ namespace delta {
 
 }
 
-%debug
+%defines            /* Generates header file */
+
+%glr-parser
 
 %define api.pure
 %name-prefix "Parser_"
-%locations
-%defines            /* Generates header file */
-%error-verbose
-
-%glr-parser
 
 %parse-param { Parser_Context* context }
 %lex-param { void* scanner }
 
+%locations
+
+%error-verbose
+%debug
 %initial-action
 {
 	yydebug = 0;
@@ -142,7 +143,9 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 
 %right '!' UMINUS
 
-%nonassoc LTE GTE EQ NEQ '>' '<'
+
+%nonassoc LTE GTE EQ NEQ '>' '<' ADD SUB MUL DIV
+
 
 %left  '.'
 
@@ -313,42 +316,34 @@ const_slot:		const_val nl '.' sub_slot
 
 
 		/* Operators */
-operation:		inner_value nl '+' nl direct_value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $5); }
-	|			inner_value nl '-' nl direct_value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $5); }
-	|			inner_value nl '*' nl direct_value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $5); }
-	|			inner_value nl '/' nl direct_value
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $5); }
+operation:		operation '+' operation
+						         	{ $$ = new AstNodeOperator($1, AstNodeOperator::Add, $3); }
+	|			operation '-' operation
+						         	{ $$ = new AstNodeOperator($1, AstNodeOperator::Subs, $3); }
+	|			operation '*' operation
+						         	{ $$ = new AstNodeOperator($1, AstNodeOperator::Mult, $3); }
+	|			operation '/' operation
+						     	   	{ $$ = new AstNodeOperator($1, AstNodeOperator::Div, $3); }
+
+	|			inner_value
+									{ $$ = $1; }
 ;
 
-		/* TODO: FIX ME!! Right now it can only parse simple operations. */
-bool_operation:
-				inner_val_or_comp nl AND nl inner_val_or_comp   %dprec 1
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
-	|			bool_operation nl AND nl inner_val_or_comp   %dprec 2
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
-	|			bool_operation nl AND nl bool_operation   %dprec 3
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $5); }
+		/* TODO: allow for new-lines between the first bool_operation and the operator!! */
+bool_operation: 
+				bool_operation AND nl bool_operation  
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::And, $4); }
 
-	|			inner_val_or_comp nl XOR nl inner_val_or_comp   %dprec 4
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
-	|			bool_operation nl XOR nl inner_val_or_comp   %dprec 5
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
-	|			bool_operation nl XOR nl bool_operation   %dprec 6
-										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $5); }
+	|			bool_operation XOR nl bool_operation  
+										{ $$ = new AstNodeOperator($1, AstNodeOperator::Xor, $4); }
 
-	|			inner_val_or_comp nl OR nl inner_val_or_comp   %dprec 7
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
-	|			bool_operation nl OR nl inner_val_or_comp   %dprec 8
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
-	|			bool_operation nl OR nl bool_operation		%dprec 9
-						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $5); }
+	|			bool_operation OR nl bool_operation		
+						     	       	{ $$ = new AstNodeOperator($1, AstNodeOperator::Or, $4); }
 
-	|			'!' nl direct_value
+	|			'!' nl direct_value 
 										{ $$ = new AstNodeOperator($3, AstNodeOperator::Not, 0); }
-	|			inner_val_or_comp	%dprec 10
+
+	|			inner_val_or_comp	
 										{ $$ = $1; }
 ;
 
@@ -369,7 +364,10 @@ comparison:		direct_value nl EQ nl direct_value
 
 
 		/* Something that can be a parameter of a function call */
-inner_value:	slot					{ $$ = $1; } 
+inner_value:	slot					{
+											AstNodeFunCall* f = new AstNodeFunCall($1);
+											$$ = f;
+										}
 	|			'(' value ')'	
 										{ $$ = $2; } 
 	|			const_val				{ $$ = $1; } 
@@ -386,19 +384,19 @@ direct_value:	inner_value		%dprec 1
 										{ $$ = $1; }
 	|			fun_call		%dprec 2			/* When finding a ')' suppose it belongs to a function call (where there is only one parameter) */	
 										{ $$ = $1; }
-	|			'-' direct_value		  %prec UMINUS %dprec 3
+	|			'-' direct_value  %prec UMINUS %dprec 3
 										{ $$ = new AstNodeOperator($2, AstNodeOperator::Negative, 0); }
-	|			operation				
-										{ $$ = $1; }
 ;
 
 
 
-value:			direct_value
+value:			direct_value		%dprec 1
 										{ $$ = $1; }
-	|			comparison
+	|			comparison			%dprec 2
 										{ $$ = $1; } 
-	|			bool_operation				
+	|			bool_operation		%dprec 3
+										{ $$ = $1; }
+	|			operation			%dprec 2		
 										{ $$ = $1; }
 ;
 

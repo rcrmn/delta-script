@@ -76,5 +76,9 @@ end
 f = fun (x): print x end
 //}
 
-x = a && b || d && e || c && d
+x = a ^^ k || d && e || c && x 
+
+x = a ^^ k || d && e || c && x 
+
+x = a * b + c - d / e
 
