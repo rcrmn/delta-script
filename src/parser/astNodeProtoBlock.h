@@ -20,19 +20,34 @@ namespace delta {
 		{
 			public:
 				
-				AstNodeProtoBlock() : m_name(0) {};
+				AstNodeProtoBlock() : m_parent(0), m_block(0) {};
 
 				virtual AstNodeType getType() const { return ProtoBlock; };
 
 
-				inline void setSlot(AstNodeSlot* name) { m_name = name; }
+				inline void setSlot (const std::string& name) { m_name = std::string(name); }
+
+				inline void setSlot (const char * name) { m_name = std::string(name); }
 				
-				inline AstNodeSlot* getSlot() { return m_name; }
+				inline const std::string& getSlot () const { return m_name; }
+
+
+				inline void setBlock (AstNode* block) { m_block = block; }
+
+				inline AstNode* getBlock () const { return m_block; }
+
+
+				inline void setParent (AstNode* parent) { m_parent = parent; }
+
+				inline AstNode* getParent () const { return m_parent; }
 
 			private:
 
-				AstNodeSlot* m_name;
+				std::string m_name;
 
+				AstNode* m_parent;
+
+				AstNode* m_block;
 		};
 
 	} // namespace delta

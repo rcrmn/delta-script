@@ -186,7 +186,9 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 %type <node> fun_def_plist
 
 %type <node> proto_def
-
+%type <node> proto_block
+%type <node> delim_proto_expr
+%type <node> proto_expr
 
 %type <node> if_stmt
 %type <node> elif_blocks
@@ -257,9 +259,8 @@ block_expression:
 										{ $$ = $1; }
 	|			fun_def
 										{ $$ = $1; }
-			/*
 	|			proto_def
-			*/
+										{ $$ = $1; }
 ;
 
 
@@ -544,8 +545,52 @@ fun_def_plist:	/* empty */
 ;
 
 
-proto_def:		/* TODO */
-	;
+proto_def:		PROTOTYPE NAME nl ':' nl slot ':' nl proto_block END
+										{ 
+											AstNodeProtoBlock* p = new AstNodeProtoBlock();
+											p->setSlot($2);
+											p->setParent($6);
+											p->setBlock($9);
+											$$ = p;
+										}
+	|			PROTOTYPE NAME ':' nl proto_block END
+										{ 
+											AstNodeProtoBlock* p = new AstNodeProtoBlock();
+											p->setSlot($2);
+											p->setBlock($5);
+											$$ = p;
+										}
+;
+
+proto_expr:
+				fun_def
+										{ $$ = $1; }
+	|			var_def
+										{ $$ = $1; }
+	|			proto_def
+										{ $$ = $1; }
+;
+
+delim_proto_expr: 
+				proto_expr ';'	
+										{ $$ = $1; }
+	|			proto_expr '\n'
+										{ $$ = $1; }
+	|			delim_proto_expr ';'	
+										{ $$ = $1; }
+	|			delim_proto_expr '\n'
+										{ $$ = $1; }
+;
+
+proto_block:	/* empty */
+										{ $$ = new AstNodeBlock(); }
+	|			delim_proto_expr proto_block
+										{ 
+											AstNodeBlock* b = dynamic_cast<AstNodeBlock*>($2); 
+											b->addExpression($1);
+											$$ = b;
+										}
+;
 
 
 if_stmt:		IF nl bool_expr ':' nl stmt_block END

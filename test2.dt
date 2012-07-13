@@ -76,9 +76,19 @@ end
 f = fun (x): print x end
 //}
 
+//{
 x = a ^^ k || d && e || c && x 
 
-x = a ^^ k || d && e || c && x 
+x = a ^^ k || d && e == 0 || c && x 
 
 x = a * b + c - d / e
+//}
+
+proto Test:
+	fun test():
+		print 1
+	end
+
+	var x = [1,2,3]
+end
 
