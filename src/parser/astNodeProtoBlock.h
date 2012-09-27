@@ -41,6 +41,21 @@ namespace delta {
 
 				inline AstNode* getParent () const { return m_parent; }
 
+				virtual void test() const 
+				{
+					std::vector<std::string>::const_iterator it;
+					std::cout << " PROTO < " << m_name << " >";
+					if(m_parent!=0)
+					{
+						std::cout << " : < ";
+						m_parent->test();
+						std::cout << " >";
+					}
+					std::cout << " { " << std::endl;
+					m_block->test();
+					std::cout << std::endl << " } " << std::endl;
+				}
+
 			private:
 
 				std::string m_name;

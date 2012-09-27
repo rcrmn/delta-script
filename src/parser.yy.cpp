@@ -360,19 +360,19 @@ static const signed char yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const unsigned short int yyrline[] =
 {
-       0,   229,   229,   230,   234,   233,   236,   240,   242,   244,
-     246,   248,   254,   256,   258,   260,   262,   268,   270,   272,
-     278,   282,   286,   290,   294,   302,   304,   308,   310,   314,
-     320,   322,   324,   326,   329,   335,   338,   341,   344,   347,
-     352,   354,   356,   358,   360,   362,   368,   372,   374,   375,
-     377,   378,   384,   386,   388,   394,   396,   398,   400,   404,
-     406,   411,   416,   422,   428,   434,   445,   451,   461,   463,
-     465,   467,   473,   475,   477,   479,   486,   489,   496,   503,
-     513,   519,   529,   533,   539,   548,   556,   566,   568,   570,
-     575,   577,   579,   581,   586,   587,   596,   605,   614,   623,
-     634,   642,   653,   659,   670,   679,   685,   694,   699,   700,
-     710,   715,   719,   725,   737,   742,   747,   752,   761,   763,
-     768,   773,   779,   788,   789,   793,   794
+       0,   228,   228,   229,   233,   232,   235,   239,   241,   243,
+     245,   247,   253,   255,   257,   259,   261,   267,   269,   271,
+     277,   281,   285,   289,   293,   301,   303,   307,   309,   313,
+     319,   321,   323,   325,   328,   334,   337,   340,   343,   346,
+     351,   353,   355,   357,   359,   361,   367,   371,   373,   374,
+     376,   377,   383,   385,   387,   393,   395,   397,   399,   403,
+     405,   410,   415,   421,   427,   433,   444,   450,   460,   462,
+     464,   466,   472,   474,   476,   478,   485,   488,   495,   502,
+     512,   518,   528,   532,   538,   547,   555,   565,   567,   569,
+     574,   576,   578,   580,   585,   586,   595,   604,   613,   622,
+     633,   641,   652,   658,   669,   678,   684,   693,   698,   699,
+     709,   714,   718,   724,   736,   741,   746,   751,   760,   762,
+     767,   772,   778,   787,   788,   792,   793
 };
 #endif
 
@@ -1394,105 +1394,105 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
         case 4:
 
 /* Line 936 of glr.c  */
-#line 234 "parser/delta.y"
+#line 233 "parser/delta.y"
     { context->ast->addExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 7:
 
 /* Line 936 of glr.c  */
-#line 241 "parser/delta.y"
+#line 240 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 8:
 
 /* Line 936 of glr.c  */
-#line 243 "parser/delta.y"
+#line 242 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 9:
 
 /* Line 936 of glr.c  */
-#line 245 "parser/delta.y"
+#line 244 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 10:
 
 /* Line 936 of glr.c  */
-#line 247 "parser/delta.y"
+#line 246 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 11:
 
 /* Line 936 of glr.c  */
-#line 249 "parser/delta.y"
+#line 248 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 12:
 
 /* Line 936 of glr.c  */
-#line 255 "parser/delta.y"
+#line 254 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 13:
 
 /* Line 936 of glr.c  */
-#line 257 "parser/delta.y"
+#line 256 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 14:
 
 /* Line 936 of glr.c  */
-#line 259 "parser/delta.y"
+#line 258 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 15:
 
 /* Line 936 of glr.c  */
-#line 261 "parser/delta.y"
+#line 260 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 16:
 
 /* Line 936 of glr.c  */
-#line 263 "parser/delta.y"
+#line 262 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 17:
 
 /* Line 936 of glr.c  */
-#line 269 "parser/delta.y"
+#line 268 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 18:
 
 /* Line 936 of glr.c  */
-#line 271 "parser/delta.y"
+#line 270 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 19:
 
 /* Line 936 of glr.c  */
-#line 273 "parser/delta.y"
+#line 272 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 20:
 
 /* Line 936 of glr.c  */
-#line 279 "parser/delta.y"
+#line 278 "parser/delta.y"
     {
 											((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::Assign, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 										}
@@ -1501,7 +1501,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 21:
 
 /* Line 936 of glr.c  */
-#line 283 "parser/delta.y"
+#line 282 "parser/delta.y"
     {
 											((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::AssignAdd, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 										}
@@ -1510,7 +1510,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 22:
 
 /* Line 936 of glr.c  */
-#line 287 "parser/delta.y"
+#line 286 "parser/delta.y"
     {
 											((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::AssignSubs, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 										}
@@ -1519,7 +1519,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 23:
 
 /* Line 936 of glr.c  */
-#line 291 "parser/delta.y"
+#line 290 "parser/delta.y"
     {
 											((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::AssignMult, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 										}
@@ -1528,7 +1528,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 24:
 
 /* Line 936 of glr.c  */
-#line 295 "parser/delta.y"
+#line 294 "parser/delta.y"
     {
 											((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::AssignDiv, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 										}
@@ -1537,154 +1537,154 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 25:
 
 /* Line 936 of glr.c  */
-#line 303 "parser/delta.y"
+#line 302 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 26:
 
 /* Line 936 of glr.c  */
-#line 305 "parser/delta.y"
+#line 304 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 27:
 
 /* Line 936 of glr.c  */
-#line 309 "parser/delta.y"
+#line 308 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeSlot((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.name)); }
     break;
 
   case 28:
 
 /* Line 936 of glr.c  */
-#line 311 "parser/delta.y"
+#line 310 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeSlot((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.name), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 29:
 
 /* Line 936 of glr.c  */
-#line 315 "parser/delta.y"
+#line 314 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeConstSlot((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 30:
 
 /* Line 936 of glr.c  */
-#line 321 "parser/delta.y"
+#line 320 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.node), AstNodeOperator::Add, (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 31:
 
 /* Line 936 of glr.c  */
-#line 323 "parser/delta.y"
+#line 322 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.node), AstNodeOperator::Subs, (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 32:
 
 /* Line 936 of glr.c  */
-#line 325 "parser/delta.y"
+#line 324 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.node), AstNodeOperator::Mult, (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 33:
 
 /* Line 936 of glr.c  */
-#line 327 "parser/delta.y"
+#line 326 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.node), AstNodeOperator::Div, (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 34:
 
 /* Line 936 of glr.c  */
-#line 330 "parser/delta.y"
+#line 329 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 35:
 
 /* Line 936 of glr.c  */
-#line 336 "parser/delta.y"
+#line 335 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.node), AstNodeOperator::And, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 36:
 
 /* Line 936 of glr.c  */
-#line 339 "parser/delta.y"
+#line 338 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.node), AstNodeOperator::Xor, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 37:
 
 /* Line 936 of glr.c  */
-#line 342 "parser/delta.y"
+#line 341 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.node), AstNodeOperator::Or, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 38:
 
 /* Line 936 of glr.c  */
-#line 345 "parser/delta.y"
+#line 344 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.node), AstNodeOperator::Not, 0); }
     break;
 
   case 39:
 
 /* Line 936 of glr.c  */
-#line 348 "parser/delta.y"
+#line 347 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 40:
 
 /* Line 936 of glr.c  */
-#line 353 "parser/delta.y"
+#line 352 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::CompEq, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 41:
 
 /* Line 936 of glr.c  */
-#line 355 "parser/delta.y"
+#line 354 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::CompGte, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 42:
 
 /* Line 936 of glr.c  */
-#line 357 "parser/delta.y"
+#line 356 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::CompLte, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 43:
 
 /* Line 936 of glr.c  */
-#line 359 "parser/delta.y"
+#line 358 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::CompLt, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 44:
 
 /* Line 936 of glr.c  */
-#line 361 "parser/delta.y"
+#line 360 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::CompGt, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 45:
 
 /* Line 936 of glr.c  */
-#line 363 "parser/delta.y"
+#line 362 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), AstNodeOperator::CompNeq, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node)); }
     break;
 
   case 46:
 
 /* Line 936 of glr.c  */
-#line 368 "parser/delta.y"
+#line 367 "parser/delta.y"
     {
 											AstNodeFunCall* f = new AstNodeFunCall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node));
 											((*yyvalp).node) = f;
@@ -1694,105 +1694,105 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 47:
 
 /* Line 936 of glr.c  */
-#line 373 "parser/delta.y"
+#line 372 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.node); }
     break;
 
   case 48:
 
 /* Line 936 of glr.c  */
-#line 374 "parser/delta.y"
+#line 373 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 49:
 
 /* Line 936 of glr.c  */
-#line 376 "parser/delta.y"
+#line 375 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 50:
 
 /* Line 936 of glr.c  */
-#line 377 "parser/delta.y"
+#line 376 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 51:
 
 /* Line 936 of glr.c  */
-#line 379 "parser/delta.y"
+#line 378 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.node), AstNodeOperator::Negative, 0); }
     break;
 
   case 52:
 
 /* Line 936 of glr.c  */
-#line 385 "parser/delta.y"
+#line 384 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 53:
 
 /* Line 936 of glr.c  */
-#line 387 "parser/delta.y"
+#line 386 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 54:
 
 /* Line 936 of glr.c  */
-#line 389 "parser/delta.y"
+#line 388 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.node), AstNodeOperator::Negative, 0); }
     break;
 
   case 55:
 
 /* Line 936 of glr.c  */
-#line 395 "parser/delta.y"
+#line 394 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 56:
 
 /* Line 936 of glr.c  */
-#line 397 "parser/delta.y"
+#line 396 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 57:
 
 /* Line 936 of glr.c  */
-#line 399 "parser/delta.y"
+#line 398 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 58:
 
 /* Line 936 of glr.c  */
-#line 401 "parser/delta.y"
+#line 400 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 59:
 
 /* Line 936 of glr.c  */
-#line 405 "parser/delta.y"
+#line 404 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 60:
 
 /* Line 936 of glr.c  */
-#line 407 "parser/delta.y"
+#line 406 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 61:
 
 /* Line 936 of glr.c  */
-#line 412 "parser/delta.y"
+#line 411 "parser/delta.y"
     {
 											AstNodeFunCall* f = new AstNodeFunCall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node));
 											((*yyvalp).node) = f;
@@ -1802,7 +1802,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 62:
 
 /* Line 936 of glr.c  */
-#line 417 "parser/delta.y"
+#line 416 "parser/delta.y"
     { 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.node));
 											f->setSlot((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node));
@@ -1813,14 +1813,14 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 63:
 
 /* Line 936 of glr.c  */
-#line 423 "parser/delta.y"
+#line 422 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 64:
 
 /* Line 936 of glr.c  */
-#line 429 "parser/delta.y"
+#line 428 "parser/delta.y"
     {
 											AstNodeFunCall* f = new AstNodeFunCall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.node));
 											((*yyvalp).node) = f;
@@ -1830,7 +1830,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 65:
 
 /* Line 936 of glr.c  */
-#line 435 "parser/delta.y"
+#line 434 "parser/delta.y"
     {
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.node));
 											f->setSlot((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node));
@@ -1841,7 +1841,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 66:
 
 /* Line 936 of glr.c  */
-#line 446 "parser/delta.y"
+#line 445 "parser/delta.y"
     { 
 											AstNodeFunCall* f = dynamic_cast<AstNodeFunCall*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 											f->addParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node));
@@ -1852,7 +1852,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 67:
 
 /* Line 936 of glr.c  */
-#line 452 "parser/delta.y"
+#line 451 "parser/delta.y"
     { 
 											AstNodeFunCall* f = new AstNodeFunCall();
 											f->addParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node));
@@ -1863,63 +1863,63 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 68:
 
 /* Line 936 of glr.c  */
-#line 462 "parser/delta.y"
+#line 461 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeNumber((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.number)); }
     break;
 
   case 69:
 
 /* Line 936 of glr.c  */
-#line 464 "parser/delta.y"
+#line 463 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeString((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.str)); }
     break;
 
   case 70:
 
 /* Line 936 of glr.c  */
-#line 466 "parser/delta.y"
+#line 465 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeBoolean((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.boolean)); }
     break;
 
   case 71:
 
 /* Line 936 of glr.c  */
-#line 468 "parser/delta.y"
+#line 467 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeSymbol((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.symbol)); }
     break;
 
   case 72:
 
 /* Line 936 of glr.c  */
-#line 474 "parser/delta.y"
+#line 473 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 73:
 
 /* Line 936 of glr.c  */
-#line 476 "parser/delta.y"
+#line 475 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 74:
 
 /* Line 936 of glr.c  */
-#line 478 "parser/delta.y"
+#line 477 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 75:
 
 /* Line 936 of glr.c  */
-#line 480 "parser/delta.y"
+#line 479 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 76:
 
 /* Line 936 of glr.c  */
-#line 486 "parser/delta.y"
+#line 485 "parser/delta.y"
     {
 											((*yyvalp).node) = new AstNodeSlotDecl((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.name));
 										}
@@ -1928,7 +1928,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 77:
 
 /* Line 936 of glr.c  */
-#line 490 "parser/delta.y"
+#line 489 "parser/delta.y"
     {
 											((*yyvalp).node) = new AstNodeSlotDecl((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.name), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (6))].yystate.yysemantics.yysval.node));
 										}
@@ -1937,7 +1937,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 78:
 
 /* Line 936 of glr.c  */
-#line 497 "parser/delta.y"
+#line 496 "parser/delta.y"
     { 
 											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (12))].yystate.yysemantics.yysval.node));
 											f->setName((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (12))].yystate.yysemantics.yysval.name));
@@ -1949,7 +1949,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 79:
 
 /* Line 936 of glr.c  */
-#line 504 "parser/delta.y"
+#line 503 "parser/delta.y"
     { 
 											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.node));
 											f->setName((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (8))].yystate.yysemantics.yysval.name));
@@ -1961,7 +1961,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 80:
 
 /* Line 936 of glr.c  */
-#line 514 "parser/delta.y"
+#line 513 "parser/delta.y"
     { 
 											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.node));
 											f->setCodeBlock((((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.node));
@@ -1972,7 +1972,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 81:
 
 /* Line 936 of glr.c  */
-#line 520 "parser/delta.y"
+#line 519 "parser/delta.y"
     { 
 											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.node));
 											f->setCodeBlock((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.node));
@@ -1983,7 +1983,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 82:
 
 /* Line 936 of glr.c  */
-#line 529 "parser/delta.y"
+#line 528 "parser/delta.y"
     { 
 											AstNodeFunctionBlock* f = new AstNodeFunctionBlock();
 											((*yyvalp).node) = f;
@@ -1993,7 +1993,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 83:
 
 /* Line 936 of glr.c  */
-#line 534 "parser/delta.y"
+#line 533 "parser/delta.y"
     { 
 											AstNodeFunctionBlock* f = new AstNodeFunctionBlock();
 											f->addParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.name));
@@ -2004,7 +2004,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 84:
 
 /* Line 936 of glr.c  */
-#line 540 "parser/delta.y"
+#line 539 "parser/delta.y"
     { 
 											AstNodeFunctionBlock* f = dynamic_cast<AstNodeFunctionBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 											f->addParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.name));
@@ -2015,7 +2015,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 85:
 
 /* Line 936 of glr.c  */
-#line 549 "parser/delta.y"
+#line 548 "parser/delta.y"
     { 
 											AstNodeProtoBlock* p = new AstNodeProtoBlock();
 											p->setSlot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (10))].yystate.yysemantics.yysval.name));
@@ -2028,7 +2028,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 86:
 
 /* Line 936 of glr.c  */
-#line 557 "parser/delta.y"
+#line 556 "parser/delta.y"
     { 
 											AstNodeProtoBlock* p = new AstNodeProtoBlock();
 											p->setSlot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.name));
@@ -2040,63 +2040,63 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 87:
 
 /* Line 936 of glr.c  */
-#line 567 "parser/delta.y"
+#line 566 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 88:
 
 /* Line 936 of glr.c  */
-#line 569 "parser/delta.y"
+#line 568 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 89:
 
 /* Line 936 of glr.c  */
-#line 571 "parser/delta.y"
+#line 570 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 90:
 
 /* Line 936 of glr.c  */
-#line 576 "parser/delta.y"
+#line 575 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 91:
 
 /* Line 936 of glr.c  */
-#line 578 "parser/delta.y"
+#line 577 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 92:
 
 /* Line 936 of glr.c  */
-#line 580 "parser/delta.y"
+#line 579 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 93:
 
 /* Line 936 of glr.c  */
-#line 582 "parser/delta.y"
+#line 581 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node); }
     break;
 
   case 94:
 
 /* Line 936 of glr.c  */
-#line 586 "parser/delta.y"
+#line 585 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeBlock(); }
     break;
 
   case 95:
 
 /* Line 936 of glr.c  */
-#line 588 "parser/delta.y"
+#line 587 "parser/delta.y"
     { 
 											AstNodeBlock* b = dynamic_cast<AstNodeBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.node)); 
 											b->addExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node));
@@ -2107,7 +2107,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 96:
 
 /* Line 936 of glr.c  */
-#line 597 "parser/delta.y"
+#line 596 "parser/delta.y"
     { 
 											AstNodeIfBlock* b = new AstNodeIfBlock();
 											b->setBoolExpr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.node));
@@ -2121,7 +2121,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 97:
 
 /* Line 936 of glr.c  */
-#line 606 "parser/delta.y"
+#line 605 "parser/delta.y"
     { 
 											AstNodeIfBlock* b = new AstNodeIfBlock();
 											b->setBoolExpr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (8))].yystate.yysemantics.yysval.node));
@@ -2135,7 +2135,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 98:
 
 /* Line 936 of glr.c  */
-#line 615 "parser/delta.y"
+#line 614 "parser/delta.y"
     { 
 											AstNodeIfBlock* b = new AstNodeIfBlock();
 											b->setBoolExpr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (8))].yystate.yysemantics.yysval.node));
@@ -2149,7 +2149,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 99:
 
 /* Line 936 of glr.c  */
-#line 624 "parser/delta.y"
+#line 623 "parser/delta.y"
     { 
 											AstNodeIfBlock* b = new AstNodeIfBlock();
 											b->setBoolExpr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.node));
@@ -2163,7 +2163,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 100:
 
 /* Line 936 of glr.c  */
-#line 635 "parser/delta.y"
+#line 634 "parser/delta.y"
     {
 											AstNodeIfBlock* current = new AstNodeIfBlock();
 
@@ -2176,7 +2176,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 101:
 
 /* Line 936 of glr.c  */
-#line 643 "parser/delta.y"
+#line 642 "parser/delta.y"
     {
 											AstNodeIfBlock* current = new AstNodeIfBlock();
 
@@ -2190,14 +2190,14 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 102:
 
 /* Line 936 of glr.c  */
-#line 654 "parser/delta.y"
+#line 653 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.node); }
     break;
 
   case 103:
 
 /* Line 936 of glr.c  */
-#line 660 "parser/delta.y"
+#line 659 "parser/delta.y"
     { 
 											AstNodeWhileBlock* block = new AstNodeWhileBlock();
 											block->setBoolExpr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.node));
@@ -2209,7 +2209,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 104:
 
 /* Line 936 of glr.c  */
-#line 671 "parser/delta.y"
+#line 670 "parser/delta.y"
     { 
 											AstNodeForBlock* b = dynamic_cast<AstNodeForBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.node));
 											b->setIterator((((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.node));
@@ -2221,7 +2221,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 105:
 
 /* Line 936 of glr.c  */
-#line 680 "parser/delta.y"
+#line 679 "parser/delta.y"
     { 
 											AstNodeForBlock* b = new AstNodeForBlock();
 											b->addInVar((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node));
@@ -2232,7 +2232,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 106:
 
 /* Line 936 of glr.c  */
-#line 686 "parser/delta.y"
+#line 685 "parser/delta.y"
     {
 											AstNodeForBlock* b = dynamic_cast<AstNodeForBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 											b->addInVar((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node));
@@ -2243,21 +2243,21 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 107:
 
 /* Line 936 of glr.c  */
-#line 695 "parser/delta.y"
+#line 694 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.node); }
     break;
 
   case 108:
 
 /* Line 936 of glr.c  */
-#line 699 "parser/delta.y"
+#line 698 "parser/delta.y"
     { ((*yyvalp).node) = new AstNodeBlock(); }
     break;
 
   case 109:
 
 /* Line 936 of glr.c  */
-#line 701 "parser/delta.y"
+#line 700 "parser/delta.y"
     { 
 											AstNodeBlock* b = dynamic_cast<AstNodeBlock*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.node)); 
 											b->addExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.node));
@@ -2268,14 +2268,14 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 110:
 
 /* Line 936 of glr.c  */
-#line 711 "parser/delta.y"
+#line 710 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.node); }
     break;
 
   case 111:
 
 /* Line 936 of glr.c  */
-#line 715 "parser/delta.y"
+#line 714 "parser/delta.y"
     {
 											AstNodeArray* a = new AstNodeArray();
 											((*yyvalp).node) = a;
@@ -2285,7 +2285,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 112:
 
 /* Line 936 of glr.c  */
-#line 720 "parser/delta.y"
+#line 719 "parser/delta.y"
     {
 											AstNodeArray* a = new AstNodeArray();
 											a->addValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.node));
@@ -2296,7 +2296,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 113:
 
 /* Line 936 of glr.c  */
-#line 726 "parser/delta.y"
+#line 725 "parser/delta.y"
     {
 											AstNodeArray* a = dynamic_cast<AstNodeArray*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
 											a->addValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node));
@@ -2307,7 +2307,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 114:
 
 /* Line 936 of glr.c  */
-#line 738 "parser/delta.y"
+#line 737 "parser/delta.y"
     {
 											AstNodeRange* r = new AstNodeRange((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.node));
 											((*yyvalp).node) = r;
@@ -2317,7 +2317,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 115:
 
 /* Line 936 of glr.c  */
-#line 743 "parser/delta.y"
+#line 742 "parser/delta.y"
     {
 											AstNodeRange* r = new AstNodeRange((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (7))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.node));
 											((*yyvalp).node) = r;
@@ -2327,7 +2327,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 116:
 
 /* Line 936 of glr.c  */
-#line 748 "parser/delta.y"
+#line 747 "parser/delta.y"
     {
 											AstNodeRange* r = new AstNodeRange((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.node));
 											((*yyvalp).node) = r;
@@ -2337,7 +2337,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 117:
 
 /* Line 936 of glr.c  */
-#line 753 "parser/delta.y"
+#line 752 "parser/delta.y"
     {
 											AstNodeRange* r = new AstNodeRange((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (10))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (10))].yystate.yysemantics.yysval.node));
 											((*yyvalp).node) = r;
@@ -2347,21 +2347,21 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 118:
 
 /* Line 936 of glr.c  */
-#line 762 "parser/delta.y"
+#line 761 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.node); }
     break;
 
   case 119:
 
 /* Line 936 of glr.c  */
-#line 764 "parser/delta.y"
+#line 763 "parser/delta.y"
     { ((*yyvalp).node) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.node); }
     break;
 
   case 120:
 
 /* Line 936 of glr.c  */
-#line 769 "parser/delta.y"
+#line 768 "parser/delta.y"
     { 
 											AstNodeMap* m = new AstNodeMap();
 											((*yyvalp).node) = m;
@@ -2371,7 +2371,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 121:
 
 /* Line 936 of glr.c  */
-#line 774 "parser/delta.y"
+#line 773 "parser/delta.y"
     { 
 											AstNodeMap* m = new AstNodeMap();
 											m->addValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.node));
@@ -2382,7 +2382,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
   case 122:
 
 /* Line 936 of glr.c  */
-#line 780 "parser/delta.y"
+#line 779 "parser/delta.y"
     { 
 											AstNodeMap* m = dynamic_cast<AstNodeMap*>((((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (9))].yystate.yysemantics.yysval.node));
 											m->addValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.node), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.node));
@@ -4144,7 +4144,7 @@ yypdumpstack (yyGLRStack* yystackp)
 
 
 /* Line 2659 of glr.c  */
-#line 798 "parser/delta.y"
+#line 797 "parser/delta.y"
 
 
 /* =====================

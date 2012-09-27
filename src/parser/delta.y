@@ -222,7 +222,6 @@ void Parser_error(YYLTYPE* locp, Parser_Context* context, const char* err);
 	*  ...
 	*
 	*  One line function definitions like = fun ( x ) : print x end
-	*  +-> One line programs. Avoid having to have new line at last line.
 	******************************************/
 
 
