@@ -315,7 +315,7 @@ END_STMT	[ \t\n\r;]
 										}
 
 
-	\\\'								{ 
+	\\.									{ 
 											yyextra->appendToString(yytext); 
 										}
 

@@ -1,1 +1,11 @@
 print "hola"
+
+k = {
+	:asdf : {
+		:fgh : {
+			:klk : 123,
+			:qwe : "hola"
+		},
+		:xcv : "adeu"
+	}
+}
