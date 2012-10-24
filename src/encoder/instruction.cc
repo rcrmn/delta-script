@@ -78,7 +78,9 @@ void Instruction::setNumber(number_t number)
 
 number_t Instruction::getNumber()
 {
-	
+	if(m_operation!=OpCode::PushNumber) return;
+
+	return &(reinterpret_cast<number_t*>(m_parameter));
 }
 
 
