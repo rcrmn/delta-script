@@ -12,22 +12,22 @@ namespace delta {
 	namespace byteCode {
 
 		enum class OpCode : std::uint8_t {
-			PushNumber = 1,		// Pushes a number to the stack
-			PushTrue,			// Pushes the boolean true
-			PushFalse,			// Pushes the boolean false
-			PushNull,			// Pushes null
-			PushSymbol,			// Pushes a symbol
-			PushString,			// Pushes a string
+			PushTrue      = 0x01,	// Pushes the boolean true
+			PushFalse	  = 0x02,	// Pushes the boolean false
+			PushNull	  = 0x03,	// Pushes null
+			PushNumber	  = 0x04,	// Pushes a number to the stack
+			PushSymbol	  = 0x05,	// Pushes a symbol
+			PushString	  = 0x06,	// Pushes a string
 
-			Duplicate,			// Pushes a copy of whatever is in the stack at the specified index
+			Duplicate	  = 0x08,	// Pushes a copy of whatever is in the stack at the specified index
 
-			Pop,				// Pops N items from the stack
+			Pop			  = 0x09,	// Pops N items from the stack
 
-			CallFunction,		// Calls the function at the specified index
-			Return,				// Returns to the calling function, copying as many returned values as specified
+			CallFunction  = 0x10,	// Calls the function at the specified index
+			Return		  = 0x11,	// Returns to the calling function, copying as many returned values as specified
 
-			Jump,				// Jumps to the specified position
-			BranchOnTrue,		// Branches if the top value of the stack evaluates to true
+			BranchOnTrue  = 0x20,	// Branches if the top value of the stack evaluates to true
+			Jump		  = 0x21,	// Jumps to the specified position
 		};
 
 	};

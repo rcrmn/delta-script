@@ -34,10 +34,13 @@ typedef __DELTA_NUMBER_TYPE__	number_t;
 typedef std::uint32_t				refid_t;
 
 
-typedef std::uint16_t				stackpos_t;
+typedef std::int16_t				stackpos_t;
 
 
 typedef std::int32_t				jump_t;
+
+
+typedef std::uint8_t				byte;
 
 
 }

@@ -26,6 +26,8 @@ namespace delta {
 
 			void parse(std::istream* file);
 
+			AbstractSyntaxTree* getAST();
+
 		private:
 			Parser_Context*			m_engineContext;
 			

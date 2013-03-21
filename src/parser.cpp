@@ -21,7 +21,8 @@ using namespace std;
 
 
 Parser::Parser		() 
-	: m_engineContext(0)
+	: m_engineContext(nullptr)
+	, m_syntaxTree(nullptr)
 {
 
 }
@@ -40,6 +41,13 @@ void Parser::parse(istream* file)
 
 		// TODO: Remove
 	m_syntaxTree->test();
+}
+
+
+
+AbstractSyntaxTree* Parser::getAST()
+{
+	return m_syntaxTree;
 }
 
 

@@ -5,9 +5,10 @@
 #if ! defined __PROGRAM_CLASS_H__
 #define __PROGRAM_CLASS_H__
 
+#include "deltaConfig.h"
 #include <vector>
 #include <string>
-
+#include <map>
 
 namespace delta 
 {
@@ -35,8 +36,14 @@ namespace delta
 			bool fileLoaded;
 
 			// Vector that contains the program as bytecode
-			std::vector<char> m_programCode;
+			std::vector<byte> m_programCode;
 
+			// Contains a reference to the symbols used in the program
+			//  the symbol itself will be stored in the state of the interpreter
+			std::map<refid_t, refid_t> m_symbols;
+
+			// Contains the strings referenced in this file
+			std::map<refid_t, std::string> m_strings;
 
 	};
 
